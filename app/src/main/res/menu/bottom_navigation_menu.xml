@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home"
-        android:icon="@drawable/ic_baseline_home_24"
-        android:title="@string/menu_home">
-    </item>
-    <item
-        android:id="@+id/routes"
+        android:id="@+id/tours"
         android:icon="@drawable/ic_baseline_route_24"
-        android:title="@string/menu_routes">
+        android:title="@string/menu_tours">
     </item>
     <item
-        android:id="@+id/favorites"
-        android:icon="@drawable/ic_baseline_star_24"
-        android:title="@string/menu_favorites">
+        android:id="@+id/map"
+        android:icon="@drawable/ic_baseline_map_24"
+        android:title="@string/menu_map">
+    </item>
+    <item
+        android:id="@+id/places"
+        android:icon="@drawable/ic_baseline_place_24"
+        android:title="@string/menu_places">
     </item>
     <item
         android:id="@+id/activities"

@@ -7,9 +7,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import fi.urbanmappers.sighttour.fragments.ActivitiesFragment
-import fi.urbanmappers.sighttour.fragments.FavoritesFragment
-import fi.urbanmappers.sighttour.fragments.HomeFragment
-import fi.urbanmappers.sighttour.fragments.RoutesFragment
+import fi.urbanmappers.sighttour.fragments.PlacesFragment
+import fi.urbanmappers.sighttour.fragments.ToursFragment
+import fi.urbanmappers.sighttour.fragments.MapFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -22,18 +22,18 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         fragmentContainer = findViewById(R.id.fragmentContainer)
 
-        val homeFragment = HomeFragment()
-        val routesFragment = RoutesFragment()
-        val favoritesFragment = FavoritesFragment()
+        val toursFragment = ToursFragment()
+        val mapFragment = MapFragment()
+        val placesFragment = PlacesFragment()
         val activitiesFragment = ActivitiesFragment()
 
-        setCurrentFragment(homeFragment)
+        setCurrentFragment(toursFragment)
 
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.home -> setCurrentFragment(homeFragment)
-                R.id.routes -> setCurrentFragment(routesFragment)
-                R.id.favorites -> setCurrentFragment(favoritesFragment)
+                R.id.tours -> setCurrentFragment(toursFragment)
+                R.id.map -> setCurrentFragment(mapFragment)
+                R.id.places -> setCurrentFragment(placesFragment)
                 R.id.activities -> setCurrentFragment(activitiesFragment)
             }
             true
