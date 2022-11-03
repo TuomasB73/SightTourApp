@@ -7,6 +7,10 @@ android {
     namespace 'fi.urbanmappers.sighttour'
     compileSdk 32
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId "fi.urbanmappers.sighttour"
         minSdk 24
