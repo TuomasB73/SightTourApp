@@ -6,4 +6,5 @@
     <string name="menu_map">Map</string>
     <string name="menu_places">Places</string>
     <string name="menu_activities">Activities</string>
+    <string name="distance">f%s</string>
 </resources>
