@@ -6,15 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import fi.urbanmappers.sighttour.databinding.FragmentPlacesBinding
+import fi.urbanmappers.sighttour.datamodels.Place
 import fi.urbanmappers.sighttour.datamodels.PlacesData
 import fi.urbanmappers.sighttour.viewmodels.PlacesViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class PlacesFragment : Fragment() {
     private lateinit var binding: FragmentPlacesBinding
-
-    private lateinit var placesViewModel: PlacesViewModel
+    private val placesViewModel: PlacesViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,17 +35,16 @@ class PlacesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        placesViewModel = ViewModelProvider(this)[PlacesViewModel::class.java]
-        placesViewModel.getPlacesData("accommodation", 100)
-        placesViewModel.placesData.observe(viewLifecycleOwner) { placesData ->
-            logPlacesData(placesData)
+        placesViewModel.getPlaces(limit = 3)
+        placesViewModel.places.observe(viewLifecycleOwner) { places ->
+            places.data.forEach {
+                Log.d("PlacesData", it.toString())
+            }
         }
-        binding.placeholderTextView.text = "Test"
-    }
 
-    private fun logPlacesData(places: PlacesData) {
-        places.data.forEach {
-            Log.d("PlacesData", it.name.en)
+        placesViewModel.getPlaceById("2257")
+        placesViewModel.placeById.observe(viewLifecycleOwner) { placeById ->
+            Log.d("PlaceId", placeById.toString())
         }
     }
 }
