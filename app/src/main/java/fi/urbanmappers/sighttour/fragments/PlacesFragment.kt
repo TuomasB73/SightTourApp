@@ -8,12 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import fi.urbanmappers.sighttour.databinding.FragmentPlacesBinding
-import fi.urbanmappers.sighttour.datamodels.Place
-import fi.urbanmappers.sighttour.datamodels.PlacesData
 import fi.urbanmappers.sighttour.viewmodels.PlacesViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class PlacesFragment : Fragment() {
     private lateinit var binding: FragmentPlacesBinding

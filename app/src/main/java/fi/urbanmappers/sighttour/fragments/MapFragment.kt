@@ -18,7 +18,6 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import fi.urbanmappers.sighttour.R
-import fi.urbanmappers.sighttour.databinding.FragmentActivitiesBinding
 import fi.urbanmappers.sighttour.databinding.FragmentMapBinding
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory

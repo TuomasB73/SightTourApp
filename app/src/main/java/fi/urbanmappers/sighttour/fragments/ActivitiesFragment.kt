@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import fi.urbanmappers.sighttour.R
 import fi.urbanmappers.sighttour.databinding.FragmentActivitiesBinding
-import fi.urbanmappers.sighttour.databinding.FragmentPlacesBinding
 import fi.urbanmappers.sighttour.viewmodels.ActivitiesViewModel
 import fi.urbanmappers.sighttour.viewmodels.EventsViewModel
 
