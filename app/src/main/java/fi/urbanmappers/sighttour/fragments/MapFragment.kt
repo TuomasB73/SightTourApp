@@ -18,6 +18,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import fi.urbanmappers.sighttour.R
+import fi.urbanmappers.sighttour.databinding.FragmentActivitiesBinding
 import fi.urbanmappers.sighttour.databinding.FragmentMapBinding
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -25,17 +26,14 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.overlay.Marker
 
 class MapFragment : Fragment(), LocationListener {
-
+    private lateinit var binding: FragmentMapBinding
     private lateinit var marker: Marker
-    private var _binding: FragmentMapBinding? = null
-    private val binding get() = _binding!!
     private var latitude = 0.00
     private var longitude = 0.00
     private var altitude = 0.00
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -43,13 +41,12 @@ class MapFragment : Fragment(), LocationListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentMapBinding.inflate(inflater, container, false)
+        binding = FragmentMapBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Comment test
 
         if ((ContextCompat.checkSelfPermission(
                 requireContext(),
@@ -94,7 +91,6 @@ class MapFragment : Fragment(), LocationListener {
         binding.map.setMultiTouchControls(true)
         binding.map.controller.setZoom(17.0)
 
-
         marker = Marker(binding.map)
         marker.icon = AppCompatResources.getDrawable(
             requireContext(),
@@ -105,7 +101,6 @@ class MapFragment : Fragment(), LocationListener {
 
 
     override fun onLocationChanged(location: Location) {
-
         Log.d(
             "GEOLOCATION",
             "new latitude: ${location.latitude} longitude: ${location.longitude} and altitude: ${location.altitude}"

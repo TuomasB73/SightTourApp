@@ -1,10 +1,10 @@
 package fi.urbanmappers.sighttour.datamodels
 
-data class PlacesData(
-    val data: List<Place>
+data class EventsData(
+    val data: List<Event>
 )
 
-data class Place(
+data class Event(
     val id: String,
     val name: Name,
     val infoUrl: String?,
