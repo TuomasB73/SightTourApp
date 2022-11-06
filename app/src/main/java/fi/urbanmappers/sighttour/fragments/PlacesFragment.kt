@@ -32,9 +32,7 @@ class PlacesFragment : Fragment() {
 
         placesViewModel.getPlaces(limit = 3)
         placesViewModel.places.observe(viewLifecycleOwner) { places ->
-            places.data.forEach {
-                Log.d("PlacesData", it.toString())
-            }
+            Log.d("PlacesData", places.toString())
         }
 
         placesViewModel.getPlaceById("2257")

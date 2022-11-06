@@ -7,9 +7,9 @@ data class ActivitiesData(
 data class Activity(
     val id: String,
     val updated: String,
-    val descriptions: DescriptionLanguage,
+    val descriptions: Map<String, ActivityDescription>,
     val company: Company,
-    val open: WeekDay,
+    val open: Map<String, OpeningHours>,
     val media: List<Media>,
     val address: Address?,
     val companyAddress: Address?,
@@ -21,10 +21,6 @@ data class Activity(
     val meantFor: List<String>,
     val duration: String,
     val durationType: String
-)
-
-data class DescriptionLanguage(
-    val en: ActivityDescription
 )
 
 data class ActivityDescription(
@@ -39,10 +35,6 @@ data class Company(
     val businessId: String?,
     val email: String,
     val phone: String
-)
-
-data class WeekDay(
-    val sunday: OpeningHours
 )
 
 data class OpeningHours(

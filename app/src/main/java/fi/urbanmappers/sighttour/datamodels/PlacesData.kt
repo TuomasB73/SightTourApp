@@ -1,7 +1,8 @@
 package fi.urbanmappers.sighttour.datamodels
 
 data class PlacesData(
-    val data: List<Place>
+    val data: List<Place>,
+    val tags: Map<String, String>
 )
 
 data class Place(

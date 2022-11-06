@@ -34,9 +34,7 @@ class ActivitiesFragment : Fragment() {
 
         eventsViewModel.getEvents(limit = 3)
         eventsViewModel.events.observe(viewLifecycleOwner) { events ->
-            events.data.forEach {
-                Log.d("EventsData", it.toString())
-            }
+            Log.d("EventsData", events.toString())
         }
 
         eventsViewModel.getEventById("linkedevents:agg-195")
@@ -46,9 +44,7 @@ class ActivitiesFragment : Fragment() {
 
         activitiesViewModel.getActivities(limit = 3)
         activitiesViewModel.activities.observe(viewLifecycleOwner) { activities ->
-            activities.rows.forEach {
-                Log.d("ActivitiesData", it.toString())
-            }
+            Log.d("ActivitiesData", activities.toString())
         }
 
         activitiesViewModel.getActivityById("418816d7-07b7-4501-8139-4fe9c36e6aae")

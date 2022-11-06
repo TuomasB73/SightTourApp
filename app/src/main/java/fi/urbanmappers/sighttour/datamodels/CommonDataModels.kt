@@ -1,6 +1,7 @@
 package fi.urbanmappers.sighttour.datamodels
 
 data class Name(
+    val fi: String?,
     val en: String?
 )
 
