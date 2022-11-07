@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import androidx.lifecycle.ViewModelProvider
+import fi.urbanmappers.sighttour.R
 import fi.urbanmappers.sighttour.databinding.FragmentPlacesBinding
 import fi.urbanmappers.sighttour.datamodels.PlacesData
 import fi.urbanmappers.sighttour.viewmodels.PlacesViewModel
@@ -37,12 +40,21 @@ class PlacesFragment : Fragment() {
         placesViewModel.placesData.observe(viewLifecycleOwner) { placesData ->
             logPlacesData(placesData)
         }
-        binding.placeholderTextView.text = "Test"
+        //binding.placeholderTextView.text = "Test"
     }
 
     private fun logPlacesData(places: PlacesData) {
         places.data.forEach {
             Log.d("PlacesData", it.name.en)
+        }
+    }
+
+    private fun goToPlacesListFragment(fragment: Fragment) {
+        //  requireActivity() gets the reference from mainActivity
+        requireActivity().supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<PlacesListFragment>(R.id.fragmentContainer)
+            addToBackStack(null)
         }
     }
 }
