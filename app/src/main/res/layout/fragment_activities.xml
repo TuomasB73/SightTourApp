@@ -10,15 +10,81 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+
+        <ImageButton
+            android:id="@+id/btn_sports_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ACTIVITIES"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/button_sports_pressed"
+            app:layout_constraintBottom_toTopOf="@+id/btn_music_id"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageButton
+            android:id="@+id/btn_nature_ev_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/button_nature_ev_pressed"
+            app:layout_constraintBottom_toTopOf="@+id/btn_sightseeing_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageButton
+            android:id="@+id/btn_music_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/button_music_pressed"
+            app:layout_constraintBottom_toTopOf="@+id/btn_arts_id"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_sightseeing_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/button_sightseeing_pressed"
+            app:layout_constraintBottom_toTopOf="@+id/btn_nightlife_id"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_arts_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/button_arts_pressed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <ImageButton
+            android:id="@+id/btn_nightlife_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/button_nightlife_pressed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Find Places"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="74dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
