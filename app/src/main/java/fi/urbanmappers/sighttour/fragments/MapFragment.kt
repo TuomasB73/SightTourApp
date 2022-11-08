@@ -70,7 +70,7 @@ class MapFragment : Fragment(), LocationListener {
         binding.btn.setOnClickListener {
             Toast.makeText(requireContext(), "Started tracking", Toast.LENGTH_SHORT).show()
             lm.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER,
+                LocationManager.NETWORK_PROVIDER,
                 1,
                 1f,
                 this
