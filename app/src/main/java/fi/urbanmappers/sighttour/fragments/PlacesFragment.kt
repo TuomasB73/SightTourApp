@@ -19,8 +19,10 @@ class PlacesFragment : Fragment() {
 
     private lateinit var placesViewModel: PlacesViewModel
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -40,6 +42,7 @@ class PlacesFragment : Fragment() {
         placesViewModel.placesData.observe(viewLifecycleOwner) { placesData ->
             logPlacesData(placesData)
         }
+        goToPlacesListFragment(PlacesListFragment())
         //binding.placeholderTextView.text = "Test"
     }
 
@@ -49,12 +52,35 @@ class PlacesFragment : Fragment() {
         }
     }
 
-    private fun goToPlacesListFragment(fragment: Fragment) {
-        //  requireActivity() gets the reference from mainActivity
+    private fun btnToPlacesList() {
         requireActivity().supportFragmentManager.commit {
             setReorderingAllowed(true)
             replace<PlacesListFragment>(R.id.fragmentContainer)
             addToBackStack(null)
         }
     }
-}
+
+    private fun goToPlacesListFragment(fragment: Fragment) {
+        //  requireActivity() gets the reference from mainActivity
+
+        binding.btnNatureId.setOnClickListener {
+             btnToPlacesList()
+            }
+        binding.btnMuseumsId.setOnClickListener {
+            btnToPlacesList()
+        }
+        binding.btnLandmarksId.setOnClickListener {
+            btnToPlacesList()
+        }
+        binding.btnRestaurantsId.setOnClickListener {
+            btnToPlacesList()
+        }
+        binding.btnBeachesId.setOnClickListener {
+            btnToPlacesList()
+        }
+        binding.btnShopsId.setOnClickListener {
+            btnToPlacesList()
+            }
+        }
+    }
+

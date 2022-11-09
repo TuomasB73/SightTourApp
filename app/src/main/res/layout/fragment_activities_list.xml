@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.PlacesListFragment">
+    tools:context=".fragments.ActivitiesListFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -11,6 +11,6 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PlacesListFragment" />
+        android:text="ActivitiesListFragment" />
 
 </FrameLayout>
