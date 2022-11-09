@@ -37,8 +37,8 @@ class ActivitiesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         goToActivitiesListFragment(ActivitiesListFragment())
-        
-                eventsViewModel.getEvents(limit = 3)
+
+        eventsViewModel.getEvents(limit = 3)
         eventsViewModel.events.observe(viewLifecycleOwner) { events ->
             Log.d("EventsData", events.toString())
         }
@@ -88,6 +88,7 @@ class ActivitiesFragment : Fragment() {
         }
         binding.btnNightlifeId.setOnClickListener {
             btnToActivitiesList()
+        }
     }
 }
 

@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import androidx.lifecycle.ViewModelProvider
 import fi.urbanmappers.sighttour.R
 import androidx.fragment.app.viewModels
 import fi.urbanmappers.sighttour.databinding.FragmentPlacesBinding
@@ -42,7 +41,6 @@ class PlacesFragment : Fragment() {
         }
 
         goToPlacesListFragment(PlacesListFragment())
-    }
 
         placesViewModel.getPlaceById("2257")
         placesViewModel.placeById.observe(viewLifecycleOwner) { placeById ->
@@ -62,8 +60,8 @@ class PlacesFragment : Fragment() {
         //  requireActivity() gets the reference from mainActivity
 
         binding.btnNatureId.setOnClickListener {
-             btnToPlacesList()
-            }
+            btnToPlacesList()
+        }
         binding.btnMuseumsId.setOnClickListener {
             btnToPlacesList()
         }
@@ -78,7 +76,6 @@ class PlacesFragment : Fragment() {
         }
         binding.btnShopsId.setOnClickListener {
             btnToPlacesList()
-            }
         }
     }
-
+}
