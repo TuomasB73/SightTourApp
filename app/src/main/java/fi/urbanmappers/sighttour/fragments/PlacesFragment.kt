@@ -17,7 +17,6 @@ class PlacesFragment : Fragment() {
     private lateinit var binding: FragmentPlacesBinding
     private val placesViewModel: PlacesViewModel by viewModels()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
