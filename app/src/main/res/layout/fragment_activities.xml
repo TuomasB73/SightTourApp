@@ -11,14 +11,92 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/textEvents"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ACTIVITIES"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            android:text="Events &amp; activities"
+            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/buttons_container_activities"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="24dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textEvents">
+
+            <LinearLayout
+                android:id="@+id/buttons_container_row_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btn_sports_id"
+                    android:layout_width="140dp"
+                    android:layout_height="143dp"
+                    android:background="@drawable/button_sports_pressed" />
+
+                <ImageButton
+                    android:id="@+id/btn_nature_ev_id"
+                    android:layout_width="140dp"
+                    android:layout_height="143dp"
+                    android:background="@drawable/button_nature_ev_pressed" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/buttons_container_row_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btn_music_id"
+                    android:layout_width="140dp"
+                    android:layout_height="143dp"
+                    android:background="@drawable/button_music_pressed" />
+
+                <ImageButton
+                    android:id="@+id/btn_sightseeing_id"
+                    android:layout_width="140dp"
+                    android:layout_height="143dp"
+                    android:background="@drawable/button_sightseeing_pressed" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/buttons_container_row_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btn_arts_id"
+                    android:layout_width="140dp"
+                    android:layout_height="143dp"
+                    android:background="@drawable/button_arts_pressed" />
+
+                <ImageButton
+                    android:id="@+id/btn_nightlife_id"
+                    android:layout_width="140dp"
+                    android:layout_height="143dp"
+                    android:background="@drawable/button_nightlife_pressed" />
+            </LinearLayout>
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

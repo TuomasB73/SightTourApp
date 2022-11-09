@@ -7,4 +7,6 @@
     <string name="menu_places">Places</string>
     <string name="menu_activities">Activities</string>
     <string name="distance">f%s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

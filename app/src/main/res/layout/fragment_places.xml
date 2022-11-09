@@ -11,14 +11,92 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/placeholderTextView"
+            android:id="@+id/textPlaces"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PLACES"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            android:text="Places"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/buttons_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="24dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textPlaces">
+
+            <LinearLayout
+                android:id="@+id/buttons_container_row_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btn_nature_id"
+                    android:layout_width="140dp"
+                    android:layout_height="143dp"
+                    android:background="@drawable/button_nature_pressed" />
+
+                <ImageButton
+                    android:id="@+id/btn_museums_id"
+                    android:layout_width="140dp"
+                    android:layout_height="143dp"
+                    android:background="@drawable/button_museums_pressed" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/buttons_container_row_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btn_landmarks_id"
+                    android:layout_width="140dp"
+                    android:layout_height="143dp"
+                    android:background="@drawable/button_landmarks_pressed" />
+
+                <ImageButton
+                    android:id="@+id/btn_restaurants_id"
+                    android:layout_width="140dp"
+                    android:layout_height="143dp"
+                    android:background="@drawable/button_restaurants_pressed" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/buttons_container_row_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btn_beaches_id"
+                    android:layout_width="140dp"
+                    android:layout_height="143dp"
+                    android:background="@drawable/button_beaches_pressed" />
+
+                <ImageButton
+                    android:id="@+id/btn_shops_id"
+                    android:layout_width="140dp"
+                    android:layout_height="143dp"
+                    android:background="@drawable/button_shops_pressed" />
+            </LinearLayout>
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
