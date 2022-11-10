@@ -16,14 +16,22 @@ import fi.urbanmappers.sighttour.R
 import fi.urbanmappers.sighttour.adapters.PlacesListRecyclerViewAdapter
 import fi.urbanmappers.sighttour.databinding.FragmentPlacesBinding
 import fi.urbanmappers.sighttour.databinding.FragmentPlacesListBinding
+import fi.urbanmappers.sighttour.utils.PlacesCategory
+import fi.urbanmappers.sighttour.utils.TagCategories
 import fi.urbanmappers.sighttour.viewmodels.PlacesViewModel
 
 class PlacesListFragment : Fragment(), PlacesListRecyclerViewAdapter.PlaceItemClickListener {
     private lateinit var binding: FragmentPlacesListBinding
     private val placesViewModel: PlacesViewModel by viewModels()
+    private var category: PlacesCategory? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val categoryArg = requireArguments().getString("category")
+        if (categoryArg != null) {
+            category = PlacesCategory.valueOf(categoryArg)
+        }
     }
 
     override fun onCreateView(
@@ -38,13 +46,24 @@ class PlacesListFragment : Fragment(), PlacesListRecyclerViewAdapter.PlaceItemCl
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.placesListTitleTextView.text = category.toString()
         initializePlacesRecyclerView()
     }
 
     private fun initializePlacesRecyclerView() {
         binding.placesListRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
-        placesViewModel.getPlaces(limit = 1000)
+        val tags = when (category) {
+            PlacesCategory.Nature -> TagCategories.placesNatureTags
+            PlacesCategory.Museums -> TagCategories.placesMuseumsTags
+            PlacesCategory.Landmarks -> TagCategories.placesLandmarksTags
+            PlacesCategory.Restaurants -> TagCategories.placesRestaurantsTags
+            PlacesCategory.Beaches -> TagCategories.placesBeachesTags
+            PlacesCategory.Shops -> TagCategories.placesShopsTags
+            else -> null
+        }
+
+        placesViewModel.getPlaces(tags)
         placesViewModel.places.observe(viewLifecycleOwner) { placesData ->
             binding.placesListRecyclerView.adapter = PlacesListRecyclerViewAdapter(placesData.data, this)
         }

@@ -30,6 +30,7 @@ class MapFragment : Fragment(), LocationListener {
     private var latitude = 0.00
     private var longitude = 0.00
     private var altitude = 0.00
+    private lateinit var lm: LocationManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,30 +61,14 @@ class MapFragment : Fragment(), LocationListener {
             )
         }
 
-        val lm = requireActivity().getSystemService(Context.LOCATION_SERVICE) as
+        lm = requireActivity().getSystemService(Context.LOCATION_SERVICE) as
                 LocationManager
-        //somewhere e.g. in "start tracking" button click listener
-        binding.btn.setOnClickListener {
-            Toast.makeText(requireContext(), "Started tracking", Toast.LENGTH_SHORT).show()
-            lm.requestLocationUpdates(
-                LocationManager.NETWORK_PROVIDER,
-                1,
-                1f,
-                this
-            )
-        }
-
-        binding.btnCancel.setOnClickListener {
-            Toast.makeText(requireContext(), "Stopped tracking", Toast.LENGTH_SHORT).show()
-            lm.removeUpdates(
-                this
-            )
-            Log.d(
-                "STOP",
-                "TRACKING STOPPED"
-            )
-        }
-
+        lm.requestLocationUpdates(
+            LocationManager.GPS_PROVIDER,
+            1,
+            1f,
+            this
+        )
         Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context))
 
         binding.map.setTileSource(TileSourceFactory.MAPNIK)
@@ -98,6 +83,12 @@ class MapFragment : Fragment(), LocationListener {
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        lm.removeUpdates(this)
+        Log.d("STOP", "TRACKING STOPPED")
+    }
 
     override fun onLocationChanged(location: Location) {
         Log.d(
@@ -120,7 +111,6 @@ class MapFragment : Fragment(), LocationListener {
         marker.closeInfoWindow()
         binding.map.overlays.add(marker)
         binding.map.invalidate()
-
     }
 
     private fun getAddress(lat: Double, lng: Double): String {
