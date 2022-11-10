@@ -22,11 +22,18 @@ class PlacesListRecyclerViewAdapter(
     override fun getItemCount() = placeItems.size
 
     inner class PlaceViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var titleTextView: TextView = view.findViewById(R.id.titleTextView)
+        val titleTextView: TextView = view.findViewById(R.id.titleTextView)
+        val tagsTextView: TextView = view.findViewById(R.id.tagsTextView)
     }
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
         holder.titleTextView.text = placeItems[position].name.en
+
+        var tagsString = "Tags: "
+        placeItems[position].tags?.forEach { tag ->
+            tagsString += "${tag.name}, "
+        }
+        holder.tagsTextView.text = tagsString
 
         holder.itemView.setOnClickListener {
             placeItemClickListener.onItemClick(placeItems[position].id)
