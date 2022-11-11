@@ -53,7 +53,7 @@ data class Media(
 )
 
 data class Price(
-    val from: Int?,
-    val to: Int?,
+    val from: Double?,
+    val to: Double?,
     val pricingType: String
 )

@@ -6,8 +6,8 @@ import fi.urbanmappers.sighttour.datamodels.*
 class MyHelsinkiOpenApiRepository {
     private val myHelsinkiOpenApi = MyHelsinkiOpenApi.service
 
-    suspend fun getPlaces(tags: String? = null, limit: Int? = null): PlacesData {
-        val response = myHelsinkiOpenApi.getPlaces(tags, limit)
+    suspend fun getPlaces(tags: String? = null, distance: String? = null, limit: Int? = null): PlacesData {
+        val response = myHelsinkiOpenApi.getPlaces(tags, distance, limit)
         val responseBody = response.body()
        if (response.isSuccessful && responseBody != null) {
             return responseBody
@@ -26,8 +26,8 @@ class MyHelsinkiOpenApiRepository {
         }
     }
 
-    suspend fun getEvents(tags: String? = null, limit: Int? = null): EventsData {
-        val response = myHelsinkiOpenApi.getEvents(tags, limit)
+    suspend fun getEvents(tags: String? = null, distance: String? = null, limit: Int? = null): EventsData {
+        val response = myHelsinkiOpenApi.getEvents(tags, distance, limit)
         val responseBody = response.body()
         if (response.isSuccessful && responseBody != null) {
             return responseBody
@@ -46,8 +46,8 @@ class MyHelsinkiOpenApiRepository {
         }
     }
 
-    suspend fun getActivities(tags: String? = null, limit: Int? = null): ActivitiesData {
-        val response = myHelsinkiOpenApi.getActivities(tags, limit)
+    suspend fun getActivities(tags: String? = null, distance: String? = null, limit: Int? = null): ActivitiesData {
+        val response = myHelsinkiOpenApi.getActivities(tags, distance, limit)
         val responseBody = response.body()
         if (response.isSuccessful && responseBody != null) {
             return responseBody

@@ -14,10 +14,10 @@ class ActivitiesViewModel : ViewModel() {
     lateinit var activities: LiveData<ActivitiesData>
     lateinit var activityById: LiveData<Activity>
 
-    fun getActivities(tags: String? = null, limit: Int? = null) {
+    fun getActivities(tags: String? = null, distance: String? = null, limit: Int? = null) {
         activities = liveData(Dispatchers.IO) {
             try {
-                val retrievedActivities = myHelsinkiOpenApiRepository.getActivities(tags, limit)
+                val retrievedActivities = myHelsinkiOpenApiRepository.getActivities(tags, distance, limit)
                 emit(retrievedActivities)
             } catch (e: Exception) {
                 Log.e("PlacesViewModel getActivities error", e.toString())

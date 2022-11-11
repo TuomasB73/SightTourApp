@@ -14,10 +14,10 @@ class EventsViewModel : ViewModel() {
     lateinit var events: LiveData<EventsData>
     lateinit var eventById: LiveData<Event>
 
-    fun getEvents(tags: String? = null, limit: Int? = null) {
+    fun getEvents(tags: String? = null, distance: String? = null, limit: Int? = null) {
         events = liveData(Dispatchers.IO) {
             try {
-                val retrievedEvents = myHelsinkiOpenApiRepository.getEvents(tags, limit)
+                val retrievedEvents = myHelsinkiOpenApiRepository.getEvents(tags, distance, limit)
                 emit(retrievedEvents)
             } catch (e: Exception) {
                 Log.e("PlacesViewModel getEvents error", e.toString())

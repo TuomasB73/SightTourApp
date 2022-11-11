@@ -17,7 +17,6 @@ import fi.urbanmappers.sighttour.viewmodels.PlacesViewModel
 
 class PlacesFragment : Fragment() {
     private lateinit var binding: FragmentPlacesBinding
-    private val placesViewModel: PlacesViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,18 +36,6 @@ class PlacesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         bindCategoryButtonClicks()
-
-        placesViewModel.getPlaces()
-        placesViewModel.places.observe(viewLifecycleOwner) { places ->
-            places.tags.forEach {
-                Log.d("PlacesData", it.value)
-            }
-        }
-
-        placesViewModel.getPlaceById("2257")
-        placesViewModel.placeById.observe(viewLifecycleOwner) { placeById ->
-            Log.d("PlaceId", placeById.toString())
-        }
     }
 
     private fun bindCategoryButtonClicks() {
