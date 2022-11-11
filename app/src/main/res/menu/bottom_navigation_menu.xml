@@ -16,8 +16,8 @@
         android:title="@string/menu_places">
     </item>
     <item
-        android:id="@+id/activities"
+        android:id="@+id/activitiesAndEvents"
         android:icon="@drawable/ic_baseline_local_activity_24"
-        android:title="@string/menu_activities">
+        android:title="@string/menu_activities_and_events">
     </item>
 </menu>

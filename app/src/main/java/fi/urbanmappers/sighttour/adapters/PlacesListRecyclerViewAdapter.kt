@@ -27,7 +27,7 @@ class PlacesListRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
-        holder.titleTextView.text = placeItems[position].name.en
+        holder.titleTextView.text = placeItems[position].name.en ?: placeItems[position].name.fi
 
         var tagsString = "Tags: "
         placeItems[position].tags?.forEach { tag ->
@@ -36,11 +36,11 @@ class PlacesListRecyclerViewAdapter(
         holder.tagsTextView.text = tagsString
 
         holder.itemView.setOnClickListener {
-            placeItemClickListener.onItemClick(placeItems[position].id)
+            placeItemClickListener.onPlaceItemClick(placeItems[position].id)
         }
     }
 
     interface PlaceItemClickListener {
-        fun onItemClick(placeId: String)
+        fun onPlaceItemClick(placeId: String)
     }
 }

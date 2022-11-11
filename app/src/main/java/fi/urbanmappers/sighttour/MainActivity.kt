@@ -6,7 +6,7 @@ import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import fi.urbanmappers.sighttour.fragments.ActivitiesFragment
+import fi.urbanmappers.sighttour.fragments.ActivitiesAndEventsFragment
 import fi.urbanmappers.sighttour.fragments.PlacesFragment
 import fi.urbanmappers.sighttour.fragments.ToursFragment
 import fi.urbanmappers.sighttour.fragments.MapFragment
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         val toursFragment = ToursFragment()
         val mapFragment = MapFragment()
         val placesFragment = PlacesFragment()
-        val activitiesFragment = ActivitiesFragment()
+        val activitiesAndEventsFragment = ActivitiesAndEventsFragment()
 
         setCurrentFragment(toursFragment)
 
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.tours -> setCurrentFragment(toursFragment)
                 R.id.map -> setCurrentFragment(mapFragment)
                 R.id.places -> setCurrentFragment(placesFragment)
-                R.id.activities -> setCurrentFragment(activitiesFragment)
+                R.id.activitiesAndEvents -> setCurrentFragment(activitiesAndEventsFragment)
             }
             true
         }

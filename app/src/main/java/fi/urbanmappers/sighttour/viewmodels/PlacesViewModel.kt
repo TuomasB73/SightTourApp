@@ -13,10 +13,10 @@ class PlacesViewModel : ViewModel() {
     lateinit var places: LiveData<PlacesData>
     lateinit var placeById: LiveData<Place>
 
-    fun getPlaces(tags: String? = null, limit: Int? = null) {
+    fun getPlaces(tags: String? = null, distance: String? = null, limit: Int? = null) {
         places = liveData(Dispatchers.IO) {
             try {
-                val retrievedPlaces = myHelsinkiOpenApiRepository.getPlaces(tags, limit)
+                val retrievedPlaces = myHelsinkiOpenApiRepository.getPlaces(tags, distance, limit)
                 emit(retrievedPlaces)
             } catch (e: Exception) {
                 Log.e("PlacesViewModel getPlaces error", e.toString())

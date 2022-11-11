@@ -21,6 +21,7 @@ object MyHelsinkiOpenApi {
         @GET("v2/places/")
         suspend fun getPlaces(
             @Query("tags_search") tags: String?,
+            @Query("distance_filter") distance: String?,
             @Query("limit") limit: Int?
         ): Response<PlacesData>
 
@@ -32,6 +33,7 @@ object MyHelsinkiOpenApi {
         @GET("v1/events/")
         suspend fun getEvents(
             @Query("tags_search") tags: String?,
+            @Query("distance_filter") distance: String?,
             @Query("limit") limit: Int?
         ): Response<EventsData>
 
@@ -43,6 +45,7 @@ object MyHelsinkiOpenApi {
         @GET("v2/activities")
         suspend fun getActivities(
             @Query("tags_search") tags: String?,
+            @Query("distance_filter") distance: String?,
             @Query("limit") limit: Int?
         ): Response<ActivitiesData>
 
