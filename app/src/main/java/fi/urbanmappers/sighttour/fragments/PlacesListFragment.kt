@@ -60,7 +60,7 @@ class PlacesListFragment : Fragment(), PlacesListRecyclerViewAdapter.PlaceItemCl
         if (tags != null) {
             placesViewModel.getPlaces(tags)
             placesViewModel.places.observe(viewLifecycleOwner) { placesData ->
-                binding.placesListRecyclerView.adapter = PlacesListRecyclerViewAdapter(placesData.data, this)
+                binding.placesListRecyclerView.adapter = PlacesListRecyclerViewAdapter(placesData.data, this, requireContext())
             }
         }
     }
