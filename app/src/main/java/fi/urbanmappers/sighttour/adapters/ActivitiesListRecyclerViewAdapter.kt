@@ -24,10 +24,12 @@ class ActivitiesListRecyclerViewAdapter(
     inner class ActivityViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView = view.findViewById(R.id.titleTextView)
         val tagsTextView: TextView = view.findViewById(R.id.tagsTextView)
+        val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
     }
 
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
         holder.titleTextView.text = activityItems[position].descriptions["en"]?.name ?: activityItems[position].descriptions["fi"]?.name
+        holder.descriptionTextView.text = activityItems[position].descriptions["en"]?.description ?: activityItems[position].descriptions["fi"]?.name?.take(50).plus("...")
 
         var tagsString = "Tags: "
         activityItems[position].tags.forEach { tag ->
