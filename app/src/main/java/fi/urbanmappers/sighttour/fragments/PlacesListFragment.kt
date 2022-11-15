@@ -1,14 +1,11 @@
 package fi.urbanmappers.sighttour.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import fi.urbanmappers.sighttour.R
 import fi.urbanmappers.sighttour.adapters.PlacesListRecyclerViewAdapter
@@ -69,12 +66,11 @@ class PlacesListFragment : Fragment(), PlacesListRecyclerViewAdapter.PlaceItemCl
     }
 
     override fun onPlaceItemClick(placeId: String) {
-
         val bundle = bundleOf("placeId" to placeId)
 
         requireActivity().supportFragmentManager.commit {
             setReorderingAllowed(true)
-            replace<PlacesIndividualFragment>(R.id.fragmentContainer, args = bundle)
+            add<IndividualPlaceAndEventFragment>(R.id.fragmentContainer, args = bundle)
             addToBackStack(null)
         }
     }

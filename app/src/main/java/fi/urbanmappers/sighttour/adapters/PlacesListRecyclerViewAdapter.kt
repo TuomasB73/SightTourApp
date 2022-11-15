@@ -19,7 +19,7 @@ class PlacesListRecyclerViewAdapter(
     RecyclerView.Adapter<PlacesListRecyclerViewAdapter.PlaceViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.place_recycler_row, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.place_and_event_recycler_row, parent, false)
         return PlaceViewHolder(view)
     }
 
@@ -27,33 +27,31 @@ class PlacesListRecyclerViewAdapter(
 
     inner class PlaceViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView = view.findViewById(R.id.titleTextView)
-        //val tagsTextView: TextView = view.findViewById(R.id.tagsTextView)
-        val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
+        val tagsTextView: TextView = view.findViewById(R.id.tagsTextView)
+        val descriptionTextView: TextView = view.findViewById(R.id.individualPlaceAndEventDescriptionTextView)
         val imageTextView: ImageView = view.findViewById(R.id.imageView)
     }
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
-        // Tags
         holder.titleTextView.text = placeItems[position].name.en ?: placeItems[position].name.fi
 
-//        var tagsString = "Tags: "
-//        placeItems[position].tags?.forEach { tag ->
-//            tagsString += "${tag.name}, "
-//        }
-//        holder.tagsTextView.text = tagsString
+        // Description
+        holder.descriptionTextView.text = placeItems[position].description.body
+
+        // Tags
+        var tagsString = "Tags: "
+        placeItems[position].tags?.forEach { tag ->
+            tagsString += "${tag.name}, "
+        }
+        holder.tagsTextView.text = tagsString
+
+        if (placeItems[position].description.images != null && placeItems[position].description.images?.isNotEmpty() == true) {
+            Glide.with(context).load(placeItems[position].description.images?.first()?.url).centerCrop().into(holder.imageTextView)
+        }
 
         holder.itemView.setOnClickListener {
             placeItemClickListener.onPlaceItemClick(placeItems[position].id)
         }
-
-        // Description
-        //holder.descriptionTextView.text = placeItems[position].name.en ?: placeItems[position].name.fi
-        holder.descriptionTextView.text = placeItems[position].description.body?.take(50).plus("...")
-
-        if(placeItems[position].description.images != null && placeItems[position].description.images?.isNotEmpty() == true) {
-            Glide.with(context).load(placeItems[position].description.images?.first()?.url).centerCrop().into(holder.imageTextView)
-        }
-
     }
 
     interface PlaceItemClickListener {

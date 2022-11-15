@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:maxLines="2"
-                android:text="Title of the activity"
+                android:text="Title of the place or event"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/individualPlaceAndEventDescriptionTextView"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -67,20 +67,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/timeTextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
-                tools:text="Tags: tag, tag, tag, tag, tag, tag, tag, tag, tag, tag, tag, tag, tag, tag, " />
-
-            <TextView
-                android:id="@+id/timeTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
-                tools:text="Time: 15.11.2022 12.00" />
+                tools:text="Tags: tag, tag, tag, tag, tag, tag, tag, tag, tag, tag, tag, tag, tag, tag, " />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
