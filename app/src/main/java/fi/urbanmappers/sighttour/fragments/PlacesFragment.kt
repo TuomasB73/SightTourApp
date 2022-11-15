@@ -2,15 +2,12 @@ package fi.urbanmappers.sighttour.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
+import androidx.fragment.app.*
 import fi.urbanmappers.sighttour.R
-import androidx.fragment.app.viewModels
 import fi.urbanmappers.sighttour.databinding.FragmentPlacesBinding
 import fi.urbanmappers.sighttour.utils.PlacesCategory
 import fi.urbanmappers.sighttour.viewmodels.PlacesViewModel
@@ -64,7 +61,7 @@ class PlacesFragment : Fragment() {
 
         requireActivity().supportFragmentManager.commit {
             setReorderingAllowed(true)
-            replace<PlacesListFragment>(R.id.fragmentContainer, args = bundle)
+            add<PlacesListFragment>(R.id.fragmentContainer, args = bundle)
             addToBackStack(null)
         }
     }

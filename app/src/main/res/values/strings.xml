@@ -14,4 +14,6 @@
     <string name="activities_and_events_list_title">Activities &amp; events - %s</string>
     <string name="activities_tab_text">Activities</string>
     <string name="events_tab_text">Events</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

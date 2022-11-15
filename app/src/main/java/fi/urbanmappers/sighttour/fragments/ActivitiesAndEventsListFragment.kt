@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
@@ -82,7 +85,9 @@ class ActivitiesAndEventsListFragment : Fragment(), ActivitiesListRecyclerViewAd
         if (tags != null) {
             activitiesViewModel.getActivities(tags)
             activitiesViewModel.activities.observe(viewLifecycleOwner) { activitiesData ->
-                binding.activitiesEventsListRecyclerView.adapter = ActivitiesListRecyclerViewAdapter(activitiesData.rows, this)
+                binding.activitiesEventsListRecyclerView.adapter = ActivitiesListRecyclerViewAdapter(
+                    activitiesData.rows, this, requireContext()
+                )
             }
         }
     }
@@ -101,16 +106,30 @@ class ActivitiesAndEventsListFragment : Fragment(), ActivitiesListRecyclerViewAd
         if (tags != null) {
             eventsViewModel.getEvents(tags)
             eventsViewModel.events.observe(viewLifecycleOwner) { eventsData ->
-                binding.activitiesEventsListRecyclerView.adapter = EventsListRecyclerViewAdapter(eventsData.data, this)
+                binding.activitiesEventsListRecyclerView.adapter = EventsListRecyclerViewAdapter(
+                    eventsData.data, this, requireContext()
+                )
             }
         }
     }
 
     override fun onActivityItemClick(activityId: String) {
+        val bundle = bundleOf("activityId" to activityId)
 
+        requireActivity().supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            add<IndividualActivityFragment>(R.id.fragmentContainer, args = bundle)
+            addToBackStack(null)
+        }
     }
 
     override fun onEventItemClick(eventId: String) {
+        val bundle = bundleOf("eventId" to eventId)
 
+        requireActivity().supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            add<IndividualPlaceAndEventFragment>(R.id.fragmentContainer, args = bundle)
+            addToBackStack(null)
+        }
     }
 }

@@ -1,15 +1,12 @@
 package fi.urbanmappers.sighttour.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
+import androidx.fragment.app.*
 import fi.urbanmappers.sighttour.R
-import androidx.fragment.app.viewModels
 import fi.urbanmappers.sighttour.databinding.FragmentActivitiesAndEventsBinding
 import fi.urbanmappers.sighttour.utils.ActivitiesAndEventsCategory
 import fi.urbanmappers.sighttour.viewmodels.ActivitiesViewModel
@@ -62,7 +59,7 @@ class ActivitiesAndEventsFragment : Fragment() {
 
         requireActivity().supportFragmentManager.commit {
             setReorderingAllowed(true)
-            replace<ActivitiesAndEventsListFragment>(R.id.fragmentContainer, args = bundle)
+            add<ActivitiesAndEventsListFragment>(R.id.fragmentContainer, args = bundle)
             addToBackStack(null)
         }
     }
