@@ -28,15 +28,15 @@ class PlacesListRecyclerViewAdapter(
     inner class PlaceViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView = view.findViewById(R.id.titleTextView)
         val tagsTextView: TextView = view.findViewById(R.id.tagsTextView)
-        val descriptionTextView: TextView = view.findViewById(R.id.individualPlaceAndEventDescriptionTextView)
+        val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
         val imageTextView: ImageView = view.findViewById(R.id.imageView)
     }
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
-        holder.titleTextView.text = placeItems[position].name.en ?: placeItems[position].name.fi
+        holder.titleTextView.text = placeItems[position].name.en ?: placeItems[position].name.fi ?: ""
 
         // Description
-        holder.descriptionTextView.text = placeItems[position].description.intro
+        holder.descriptionTextView.text = placeItems[position].description.intro ?: ""
 
         // Tags
         var tagsString = "Tags: "

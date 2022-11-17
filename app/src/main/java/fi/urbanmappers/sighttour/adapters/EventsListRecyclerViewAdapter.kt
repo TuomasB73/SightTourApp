@@ -28,13 +28,13 @@ class EventsListRecyclerViewAdapter(
     inner class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView = view.findViewById(R.id.titleTextView)
         val tagsTextView: TextView = view.findViewById(R.id.tagsTextView)
-        val descriptionTextView: TextView = view.findViewById(R.id.individualPlaceAndEventDescriptionTextView)
+        val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
         val imageTextView: ImageView = view.findViewById(R.id.imageView)
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-        holder.titleTextView.text = eventItems[position].name.en ?: eventItems[position].name.fi
-        holder.descriptionTextView.text = eventItems[position].description.intro
+        holder.titleTextView.text = eventItems[position].name.en ?: eventItems[position].name.fi ?: ""
+        holder.descriptionTextView.text = eventItems[position].description.intro ?: ""
 
         var tagsString = "Tags: "
         eventItems[position].tags?.forEach { tag ->

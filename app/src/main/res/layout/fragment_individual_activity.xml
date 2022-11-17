@@ -16,7 +16,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/individualActivityTitleTextView"
+                android:id="@+id/titleTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -24,58 +24,120 @@
                 android:layout_marginEnd="16dp"
                 android:textAlignment="center"
                 android:textSize="30sp"
-                app:layout_constraintBottom_toTopOf="@+id/individualActivityLine"
+                app:layout_constraintBottom_toTopOf="@+id/line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="The Name Of the Activity" />
+                tools:text="The Name of the Activity" />
 
             <ImageView
-                android:id="@+id/individualActivityLine"
+                android:id="@+id/line"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/individualActivityImageView"
+                app:layout_constraintBottom_toTopOf="@+id/imageView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/line" />
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/individualActivityImageView"
+                android:id="@+id/imageView"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="240dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:paddingHorizontal="30dp"
-                app:layout_constraintBottom_toTopOf="@+id/individualActivityDescriptionTextView"
+                app:layout_constraintBottom_toTopOf="@+id/descriptionTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:shapeAppearanceOverlay="@style/customRoundedImageView"
-                tools:srcCompat="@drawable/alpi2" />
+                app:srcCompat="@drawable/no_image_placeholder" />
 
             <TextView
-                android:id="@+id/individualActivityDescriptionTextView"
+                android:id="@+id/descriptionTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="24dp"
-                app:layout_constraintBottom_toTopOf="@+id/individualActivityImageButton"
+                app:layout_constraintBottom_toTopOf="@+id/companyTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="Activity description" />
 
+            <TextView
+                android:id="@+id/companyTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                app:layout_constraintBottom_toTopOf="@+id/openTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Company:" />
+
+            <TextView
+                android:id="@+id/openTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                app:layout_constraintBottom_toTopOf="@+id/addressTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Open:" />
+
+            <TextView
+                android:id="@+id/addressTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                app:layout_constraintBottom_toTopOf="@+id/siteUrlTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Address:" />
+
+            <TextView
+                android:id="@+id/siteUrlTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                app:layout_constraintBottom_toTopOf="@+id/priceTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Site URL:" />
+
+            <TextView
+                android:id="@+id/priceTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                app:layout_constraintBottom_toTopOf="@+id/durationTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Price:" />
+
+            <TextView
+                android:id="@+id/durationTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                app:layout_constraintBottom_toTopOf="@+id/showOnMapButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Duration:" />
+
             <ImageButton
-                android:id="@+id/individualActivityImageButton"
+                android:id="@+id/showOnMapButton"
                 android:layout_width="260dp"
                 android:layout_height="60dp"
                 android:layout_margin="24dp"
                 android:background="@drawable/button_show_on_map_pressed"
                 android:scaleType="fitCenter"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
