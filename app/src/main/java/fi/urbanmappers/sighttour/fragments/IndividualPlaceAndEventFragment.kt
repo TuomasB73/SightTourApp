@@ -1,6 +1,8 @@
 package fi.urbanmappers.sighttour.fragments
 
 import android.os.Bundle
+import android.text.Html
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,16 +46,22 @@ class IndividualPlaceAndEventFragment : Fragment() {
         if (placeId != null) {
             placesViewModel.getPlaceById(placeId)
             placesViewModel.placeById.observe(viewLifecycleOwner) { place ->
-                setDataToUI(place.name.en ?: place.name.fi ?: "", place.description.body ?: "",
-                    place.description.images?.first()?.url ?: "", null)
+                val title = place.name.en ?: place.name.fi ?: ""
+                val description = place.description.body ?: ""
+                val imageUrl = if (place.description.images != null && place.description.images.isNotEmpty())
+                    place.description.images.first().url else ""
+                val eventDates = null
+                setDataToUI(title, description, imageUrl, eventDates)
             }
         } else if (eventId != null) {
             eventsViewModel.getEventById(eventId)
             eventsViewModel.eventById.observe(viewLifecycleOwner) { event ->
-                setDataToUI(event.name.en ?: event.name.fi ?: "", event.description.body ?: "",
-                    event.description.images?.first()?.url ?: "", "Event dates: ${event.eventDates.startingDay ?: ""} - " +
-                            (event.eventDates.endingDay ?: "")
-                )
+                val title = event.name.en ?: event.name.fi ?: ""
+                val description = Html.fromHtml(event.description.body).toString() ?: ""
+                val imageUrl = if (event.description.images != null && event.description.images.isNotEmpty())
+                    event.description.images.first().url else ""
+                val eventDates = event.eventDates?.endingDay ?: ""
+                setDataToUI(title, description, imageUrl, eventDates)
             }
         }
     }

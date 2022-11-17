@@ -36,7 +36,7 @@ class PlacesListRecyclerViewAdapter(
         holder.titleTextView.text = placeItems[position].name.en ?: placeItems[position].name.fi
 
         // Description
-        holder.descriptionTextView.text = placeItems[position].description.body
+        holder.descriptionTextView.text = placeItems[position].description.intro
 
         // Tags
         var tagsString = "Tags: "

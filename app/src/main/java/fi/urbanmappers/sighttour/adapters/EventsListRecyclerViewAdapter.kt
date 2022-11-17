@@ -34,7 +34,7 @@ class EventsListRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         holder.titleTextView.text = eventItems[position].name.en ?: eventItems[position].name.fi
-        holder.descriptionTextView.text = eventItems[position].description.body
+        holder.descriptionTextView.text = eventItems[position].description.intro
 
         var tagsString = "Tags: "
         eventItems[position].tags?.forEach { tag ->
