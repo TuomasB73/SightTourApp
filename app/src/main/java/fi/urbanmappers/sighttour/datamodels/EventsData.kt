@@ -12,7 +12,7 @@ data class Event(
     val location: Location,
     val description: Description,
     val tags: List<Tag>?,
-    val eventDates: EventDates
+    val eventDates: EventDates?
 )
 
 data class EventDates(
