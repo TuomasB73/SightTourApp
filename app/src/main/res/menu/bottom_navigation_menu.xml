@@ -12,7 +12,7 @@
     </item>
     <item
         android:id="@+id/places"
-        android:icon="@drawable/ic_baseline_place_24"
+        android:icon="@drawable/button_nature_pressed"
         android:title="@string/menu_places">
     </item>
     <item
