@@ -31,11 +31,12 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:padding="4dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/customRoundedImageView"
-                app:srcCompat="@drawable/alpi" />
+                app:srcCompat="@drawable/no_image_placeholder" />
 
             <TextView
                 android:id="@+id/titleTextView"
@@ -45,13 +46,13 @@
                 android:maxLines="2"
                 android:text="Title of the activity"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@+id/individualPlaceAndEventDescriptionTextView"
+                app:layout_constraintBottom_toTopOf="@+id/descriptionTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/individualPlaceAndEventDescriptionTextView"
+                android:id="@+id/descriptionTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -67,20 +68,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/timeTextView"
+                app:layout_constraintBottom_toTopOf="@+id/durationTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 tools:text="Tags: tag, tag, tag, tag, tag, tag, tag, tag, tag, tag, tag, tag, tag, tag, " />
 
             <TextView
-                android:id="@+id/timeTextView"
+                android:id="@+id/durationTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
-                tools:text="Time: 15.11.2022 12.00" />
+                tools:text="Duration: 3 h" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

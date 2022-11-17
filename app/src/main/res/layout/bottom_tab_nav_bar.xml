@@ -7,9 +7,9 @@
 
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/backgroundImageView"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="74dp"
         android:layout_gravity="top"
         android:layout_weight="1"
         android:scaleType="fitXY"
@@ -23,63 +23,96 @@
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/btn_nature_id"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="8dp"
-                android:background="@drawable/menu_activities_icon" />
+                android:id="@+id/menu_btn_tours"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_tours" />
+
+            <TextView
+                android:id="@+id/toursTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_tours"
+                android:textAlignment="center"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/menu_btn_map"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="8dp"
-                android:background="@drawable/menu_map_icon" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_map" />
+
+            <TextView
+                android:id="@+id/mapTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_map"
+                android:textAlignment="center"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/menu_btn_places"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="8dp"
-                android:background="@drawable/menu_places_icon" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_places" />
+
+            <TextView
+                android:id="@+id/placesTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_places"
+                android:textAlignment="center"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/menu_btn_activities"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="8dp"
-                android:background="@drawable/menu_activities_icon" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_activities" />
+
+            <TextView
+                android:id="@+id/activitiesAndEventsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/menu_activities_and_events"
+                android:textAlignment="center"
+                android:textSize="12sp" />
         </LinearLayout>
 
     </LinearLayout>

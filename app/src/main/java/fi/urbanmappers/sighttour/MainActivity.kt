@@ -2,28 +2,23 @@ package fi.urbanmappers.sighttour
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.FrameLayout
-import android.widget.ImageButton
-import android.widget.LinearLayout
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import fi.urbanmappers.sighttour.databinding.ActivityMainBinding
 import fi.urbanmappers.sighttour.fragments.ActivitiesAndEventsFragment
 import fi.urbanmappers.sighttour.fragments.PlacesFragment
 import fi.urbanmappers.sighttour.fragments.ToursFragment
 import fi.urbanmappers.sighttour.fragments.MapFragment
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var bottomNavigationView: BottomNavigationView
-    private lateinit var fragmentContainer: FrameLayout
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        //bottomNavigationView = findViewById(R.id.bottomNavigationView)
-        val bottomTabNavBar = findViewById<FrameLayout>(R.id.bottomTabNavBar)
-        fragmentContainer = findViewById(R.id.fragmentContainer)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         val toursFragment = ToursFragment()
         val mapFragment = MapFragment()
@@ -32,33 +27,44 @@ class MainActivity : AppCompatActivity() {
 
         setCurrentFragment(toursFragment)
 
-        bottomTabNavBar.findViewById<ImageButton>(R.id.btn_nature_id).setOnClickListener {
+        binding.bottomTabNavBar.menuBtnTours.setOnClickListener {
             setCurrentFragment(toursFragment)
         }
-        bottomTabNavBar.findViewById<ImageButton>(R.id.menu_btn_map).setOnClickListener {
+        binding.bottomTabNavBar.menuBtnMap.setOnClickListener {
             setCurrentFragment(mapFragment)
         }
-        bottomTabNavBar.findViewById<ImageButton>(R.id.menu_btn_places).setOnClickListener {
+        binding.bottomTabNavBar.menuBtnPlaces.setOnClickListener {
             setCurrentFragment(placesFragment)
         }
-        bottomTabNavBar.findViewById<ImageButton>(R.id.menu_btn_activities).setOnClickListener {
+        binding.bottomTabNavBar.menuBtnActivities.setOnClickListener {
             setCurrentFragment(activitiesAndEventsFragment)
         }
-        /*bottomNavigationView.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.tours -> setCurrentFragment(toursFragment)
-                R.id.map -> setCurrentFragment(mapFragment)
-                R.id.places -> setCurrentFragment(placesFragment)
-                R.id.activitiesAndEvents -> setCurrentFragment(activitiesAndEventsFragment)
-            }
-            true
-        }*/
     }
 
     private fun setCurrentFragment(fragment: Fragment) {
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             replace(R.id.fragmentContainer, fragment)
+        }
+
+        binding.bottomTabNavBar.menuBtnTours.background =
+            AppCompatResources.getDrawable(this, R.drawable.btn_tours)
+        binding.bottomTabNavBar.menuBtnMap.background =
+            AppCompatResources.getDrawable(this, R.drawable.btn_map)
+        binding.bottomTabNavBar.menuBtnPlaces.background =
+            AppCompatResources.getDrawable(this, R.drawable.btn_places)
+        binding.bottomTabNavBar.menuBtnActivities.background =
+            AppCompatResources.getDrawable(this, R.drawable.btn_activities)
+
+        when (fragment) {
+            is ToursFragment -> binding.bottomTabNavBar.menuBtnTours.background =
+                AppCompatResources.getDrawable(this, R.drawable.btn_tours_selected)
+            is MapFragment ->  binding.bottomTabNavBar.menuBtnMap.background =
+                AppCompatResources.getDrawable(this, R.drawable.btn_map_selected)
+            is PlacesFragment -> binding.bottomTabNavBar.menuBtnPlaces.background =
+                AppCompatResources.getDrawable(this, R.drawable.btn_places_selected)
+            is ActivitiesAndEventsFragment ->  binding.bottomTabNavBar.menuBtnActivities.background =
+                AppCompatResources.getDrawable(this, R.drawable.btn_activities_selected)
         }
     }
 }

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import fi.urbanmappers.sighttour.R
 import fi.urbanmappers.sighttour.databinding.FragmentIndividualPlaceAndEventBinding
 import fi.urbanmappers.sighttour.viewmodels.EventsViewModel
 import fi.urbanmappers.sighttour.viewmodels.PlacesViewModel
@@ -49,34 +50,29 @@ class IndividualPlaceAndEventFragment : Fragment() {
                 val title = place.name.en ?: place.name.fi ?: ""
                 val description = place.description.body ?: ""
                 val imageUrl = if (place.description.images != null && place.description.images.isNotEmpty())
-                    place.description.images.first().url else ""
-                val eventDates = null
-                setDataToUI(title, description, imageUrl, eventDates)
+                    place.description.images.first().url else null
+                setDataToUI(title, description, imageUrl)
             }
         } else if (eventId != null) {
             eventsViewModel.getEventById(eventId)
             eventsViewModel.eventById.observe(viewLifecycleOwner) { event ->
                 val title = event.name.en ?: event.name.fi ?: ""
-                val description = Html.fromHtml(event.description.body).toString() ?: ""
+                val description = Html.fromHtml(event.description.body).toString()
                 val imageUrl = if (event.description.images != null && event.description.images.isNotEmpty())
-                    event.description.images.first().url else ""
-                val eventDates = event.eventDates?.endingDay ?: ""
-                setDataToUI(title, description, imageUrl, eventDates)
+                    event.description.images.first().url else null
+                setDataToUI(title, description, imageUrl)
             }
         }
     }
 
-    private fun setDataToUI(title: String?, description: String?, imageUrl: String?, eventDates: String?) {
-        binding.individualPlaceAndEventTitleTextView.text = title
-        binding.individualPlaceAndEventDescriptionTextView.text = description
+    private fun setDataToUI(title: String?, description: String?, imageUrl: String?) {
+        binding.titleTextView.text = title
+        binding.descriptionTextView.text = description
 
         if (imageUrl != null) {
-            Glide.with(requireContext()).load(imageUrl).centerCrop().into(binding.individualPlaceAndEventImageView)
+            Glide.with(requireContext()).load(imageUrl).centerCrop().into(binding.imageView)
         }
 
-        if (eventDates != null) {
-            binding.eventDatesTextView.visibility = View.VISIBLE
-            binding.eventDatesTextView.text = eventDates
-        }
+        binding.showOnMapButton.visibility = View.VISIBLE
     }
 }

@@ -19,7 +19,7 @@ data class Activity(
     val priceEUR: Price,
     val availableMonths: List<String>,
     val meantFor: List<String>,
-    val duration: String,
+    val duration: String?,
     val durationType: String
 )
 
