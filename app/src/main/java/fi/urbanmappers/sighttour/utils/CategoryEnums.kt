@@ -7,3 +7,11 @@ enum class PlacesCategory {
 enum class ActivitiesAndEventsCategory {
     Sports, Nature, Music, Sightseeing, Arts, Nightlife
 }
+
+enum class ToursCategory {
+    Nature, Shopping, City, Culture, Sports, Sightseeing
+}
+
+enum class ToursMobilityMethod {
+    Walking, Bicycling, EScooter, Bus, Tram, Metro, Ferry
+}
