@@ -30,7 +30,7 @@ class ActivitiesListRecyclerViewAdapter(
         val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
         val durationTextView: TextView = view.findViewById(R.id.durationTextView)
         val tagsTextView: TextView = view.findViewById(R.id.tagsTextView)
-        val imageTextView: ImageView = view.findViewById(R.id.imageView)
+        val imageView: ImageView = view.findViewById(R.id.imageView)
     }
 
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
@@ -46,7 +46,7 @@ class ActivitiesListRecyclerViewAdapter(
         holder.tagsTextView.text = tagsString
 
         if (activityItems[position].media.isNotEmpty()) {
-            Glide.with(context).load(activityItems[position].media.first().smallUrl).centerCrop().into(holder.imageTextView)
+            Glide.with(context).load(activityItems[position].media.first().smallUrl).centerCrop().into(holder.imageView)
         }
 
         holder.itemView.setOnClickListener {

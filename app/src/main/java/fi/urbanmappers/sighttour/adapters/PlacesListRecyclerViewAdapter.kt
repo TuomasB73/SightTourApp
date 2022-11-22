@@ -29,7 +29,7 @@ class PlacesListRecyclerViewAdapter(
         val titleTextView: TextView = view.findViewById(R.id.titleTextView)
         val tagsTextView: TextView = view.findViewById(R.id.tagsTextView)
         val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
-        val imageTextView: ImageView = view.findViewById(R.id.imageView)
+        val imageView: ImageView = view.findViewById(R.id.imageView)
     }
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
@@ -46,7 +46,7 @@ class PlacesListRecyclerViewAdapter(
         holder.tagsTextView.text = tagsString
 
         if (placeItems[position].description.images != null && placeItems[position].description.images?.isNotEmpty() == true) {
-            Glide.with(context).load(placeItems[position].description.images?.first()?.url).centerCrop().into(holder.imageTextView)
+            Glide.with(context).load(placeItems[position].description.images?.first()?.url).centerCrop().into(holder.imageView)
         }
 
         holder.itemView.setOnClickListener {
