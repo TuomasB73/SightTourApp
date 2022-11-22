@@ -29,7 +29,7 @@ class EventsListRecyclerViewAdapter(
         val titleTextView: TextView = view.findViewById(R.id.titleTextView)
         val tagsTextView: TextView = view.findViewById(R.id.tagsTextView)
         val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
-        val imageTextView: ImageView = view.findViewById(R.id.imageView)
+        val imageView: ImageView = view.findViewById(R.id.imageView)
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
@@ -43,7 +43,7 @@ class EventsListRecyclerViewAdapter(
         holder.tagsTextView.text = tagsString
 
         if (eventItems[position].description.images != null && eventItems[position].description.images?.isNotEmpty() == true) {
-            Glide.with(context).load(eventItems[position].description.images?.first()?.url).centerCrop().into(holder.imageTextView)
+            Glide.with(context).load(eventItems[position].description.images?.first()?.url).centerCrop().into(holder.imageView)
         }
 
         holder.itemView.setOnClickListener {

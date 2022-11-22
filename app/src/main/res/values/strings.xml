@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SightTour</string>
+    <string name="app_name">SIGHTour</string>
 
     <!-- Navigation menu items -->
     <string name="menu_tours">Tours</string>
@@ -20,4 +20,5 @@
     <string name="site_url_text">Site URL: %s</string>
     <string name="price_text">Price: %s€ - %s€, type: %s</string>
     <string name="duration_text">Duration: %sh</string>
+    <string name="tours_title_text">Find tours and routes in Helsinki</string>
 </resources>
