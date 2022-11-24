@@ -48,40 +48,58 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView">
 
                 <ImageView
-                    android:id="@+id/tourCategoryImageView1"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    app:srcCompat="@drawable/nature_icon" />
+                    android:id="@+id/natureCategoryImageView"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_margin="1dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/nature_icon"
+                    tools:visibility="visible" />
 
                 <ImageView
-                    android:id="@+id/tourCategoryImageView2"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    app:srcCompat="@drawable/shopping_icon" />
+                    android:id="@+id/shoppingCategoryImageView"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_margin="1dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/shopping_icon"
+                    tools:visibility="visible" />
 
                 <ImageView
-                    android:id="@+id/tourCategoryImageView3"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    app:srcCompat="@drawable/city_icon" />
+                    android:id="@+id/cityCategoryImageView"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_margin="1dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/city_icon"
+                    tools:visibility="visible" />
 
                 <ImageView
-                    android:id="@+id/tourCategoryImageView4"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    app:srcCompat="@drawable/culture_icon" />
+                    android:id="@+id/cultureCategoryImageView"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_margin="1dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/culture_icon"
+                    tools:visibility="visible" />
 
                 <ImageView
-                    android:id="@+id/tourCategoryImageView5"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    app:srcCompat="@drawable/sports_icon" />
+                    android:id="@+id/sportsCategoryImageView"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_margin="1dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/sports_icon"
+                    tools:visibility="visible" />
 
                 <ImageView
-                    android:id="@+id/tourCategoryImageView6"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    app:srcCompat="@drawable/sightseeing_icon" />
+                    android:id="@+id/sightseeingCategoryImageView"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_margin="1dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/sightseeing_icon"
+                    tools:visibility="visible" />
             </LinearLayout>
 
             <TextView
@@ -132,46 +150,67 @@
                 app:layout_constraintStart_toEndOf="@+id/imageView">
 
                 <ImageView
-                    android:id="@+id/mobilityMethodImageView1"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:srcCompat="@drawable/walking_icon" />
+                    android:id="@+id/walkingMobilityMethodImageView"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_margin="1dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/walking_icon"
+                    tools:visibility="visible" />
 
                 <ImageView
-                    android:id="@+id/mobilityMethodImageView2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:srcCompat="@drawable/bicycle_icon" />
+                    android:id="@+id/bicyclingMobilityMethodImageView"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_margin="1dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/bicycle_icon"
+                    tools:visibility="visible" />
 
                 <ImageView
-                    android:id="@+id/mobilityMethodImageView3"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:srcCompat="@drawable/escooter_icon" />
+                    android:id="@+id/escooterMobilityMethodImageView"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_margin="1dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/escooter_icon"
+                    tools:visibility="visible" />
 
                 <ImageView
-                    android:id="@+id/mobilityMethodImageView4"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:srcCompat="@drawable/bus_icon" />
+                    android:id="@+id/busMobilityMethodImageView"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_margin="1dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/bus_icon"
+                    tools:visibility="visible" />
 
                 <ImageView
-                    android:id="@+id/mobilityMethodImageView5"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:srcCompat="@drawable/tram_icon" />
+                    android:id="@+id/tramMobilityMethodImageView"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_margin="1dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/tram_icon"
+                    tools:visibility="visible" />
 
                 <ImageView
-                    android:id="@+id/mobilityMethodImageView6"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:srcCompat="@drawable/metro_icon" />
+                    android:id="@+id/metroMobilityMethodImageView"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_margin="1dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/metro_icon"
+                    tools:visibility="visible" />
 
                 <ImageView
-                    android:id="@+id/mobilityMethodImageView7"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    app:srcCompat="@drawable/ferry_icon" />
+                    android:id="@+id/ferryMobilityMethodImageView"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_margin="1dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ferry_icon"
+                    tools:visibility="visible" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
