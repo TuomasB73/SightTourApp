@@ -22,31 +22,18 @@
             app:layout_constraintTop_toBottomOf="@+id/toursTitleTextView" />
 
         <TextView
-            android:id="@+id/appNameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/app_name"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="34sp"
-            android:textStyle="bold|italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/toursTitleTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="40dp"
             android:text="@string/tours_title_text"
             android:textAlignment="center"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appNameTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/toursListRecyclerView"
@@ -57,6 +44,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="239dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/sightour_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
