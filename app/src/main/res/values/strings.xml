@@ -20,5 +20,7 @@
     <string name="site_url_text">Site URL: %s</string>
     <string name="price_text">Price: %s€ - %s€, type: %s</string>
     <string name="duration_text">Duration: %sh</string>
-    <string name="tours_title_text">Find tours and routes in Helsinki</string>
+    <string name="tours_title_text">Find tours and explore Helsinki</string>
+    <string name="tour_start_end_points_text">%s - %s</string>
+    <string name="distance_duration_text">%s km, %s min</string>
 </resources>

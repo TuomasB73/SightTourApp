@@ -18,6 +18,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Activities and events - Category" />
 
+    <ImageView
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginEnd="23dp"
+        android:src="@drawable/line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activitiesEventsListTitleTextView" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/activitiesEventsTabLayout"
         android:layout_width="0dp"
@@ -49,21 +60,22 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activitiesEventsTabLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/activitiesEventsTabLayout"
+        tools:visibility="visible" />
 
-    <ImageView
-        android:id="@+id/line"
-        android:layout_width="match_parent"
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/activitiesEventsListProgressIndicator"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
-        android:layout_marginEnd="23dp"
-        android:src="@drawable/line"
+        android:indeterminate="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activitiesEventsListTitleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/activitiesEventsTabLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

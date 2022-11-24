@@ -60,6 +60,8 @@ class PlacesListFragment : Fragment(), PlacesListRecyclerViewAdapter.PlaceItemCl
         if (tags != null) {
             placesViewModel.getPlaces(tags)
             placesViewModel.places.observe(viewLifecycleOwner) { placesData ->
+                binding.placesListProgressIndicator.visibility = View.GONE
+                binding.placesListRecyclerView.visibility = View.VISIBLE
                 binding.placesListRecyclerView.adapter = PlacesListRecyclerViewAdapter(placesData.data, this, requireContext())
             }
         }
@@ -69,6 +71,12 @@ class PlacesListFragment : Fragment(), PlacesListRecyclerViewAdapter.PlaceItemCl
         val bundle = bundleOf("placeId" to placeId)
 
         requireActivity().supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.slide_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out
+            )
             setReorderingAllowed(true)
             add<IndividualPlaceAndEventFragment>(R.id.fragmentContainer, args = bundle)
             addToBackStack(null)

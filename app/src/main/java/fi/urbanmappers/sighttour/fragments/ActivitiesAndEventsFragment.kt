@@ -58,6 +58,12 @@ class ActivitiesAndEventsFragment : Fragment() {
         val bundle = bundleOf("category" to activitiesAndEventsCategory.toString())
 
         requireActivity().supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.slide_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out
+            )
             setReorderingAllowed(true)
             add<ActivitiesAndEventsListFragment>(R.id.fragmentContainer, args = bundle)
             addToBackStack(null)

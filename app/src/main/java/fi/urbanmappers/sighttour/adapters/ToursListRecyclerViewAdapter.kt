@@ -39,22 +39,17 @@ class ToursListRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: TourViewHolder, position: Int) {
-        Log.d("TourName", tourItems[position].name)
         holder.titleTextView.text = tourItems[position].name
-        holder.routeStartEndPointsTextView.text = "${tourItems[position].tripStages.first().startLocation.placeName} - " +
-                "${tourItems[position].tripStages.last().endLocation.placeName}"
-        var totalDistance = 0.0
-        tourItems[position].tripStages.forEach { tripStage ->
-            totalDistance += tripStage.lengthInKm
-        }
-        var totalDuration = 0
-        tourItems[position].tripStages.forEach { tripStage ->
-            totalDuration += tripStage.durationInMinutes
-        }
-        holder.distanceDurationTextView.text = "$totalDistance km, $totalDuration min"
+        holder.routeStartEndPointsTextView.text = context.getString(R.string.tour_start_end_points_text,
+            tourItems[position].tripStages.first().startLocation.placeName,
+            tourItems[position].tripStages.last().endLocation.placeName)
+
+        holder.distanceDurationTextView.text = context.getString(R.string.distance_duration_text,
+            tourItems[position].getTotalTourDistance().toString(), tourItems[position].getTotalTourDuration().toString())
 
         Glide.with(context).load(tourItems[position].imageUrl).centerCrop().into(holder.imageView)
 
+        // Tour categories icons visibility
         val categories = tourItems[position].categories
 
         if (categories.any { it == ToursCategory.Nature }) {
@@ -76,6 +71,7 @@ class ToursListRecyclerViewAdapter(
             holder.tourCategoryIconsContainer.findViewById<ImageView>(R.id.sightseeingCategoryImageView).visibility = View.VISIBLE
         }
 
+        // Tour mobility methods icons visibility
         val mobilityMethods = tourItems[position].tripStages.map {
             it.mobilityMethod
         }
