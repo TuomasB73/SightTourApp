@@ -14,7 +14,23 @@ data class Tour(
     val imageUrl: String,
     val tripStages: List<TripStage>,
     val categories: List<ToursCategory>
-)
+) {
+    fun getTotalTourDistance(): Double {
+        var totalDistance = 0.0
+        tripStages.forEach { tripStage ->
+            totalDistance += tripStage.lengthInKm
+        }
+        return totalDistance
+    }
+
+    fun getTotalTourDuration(): Int {
+        var totalDuration = 0
+        tripStages.forEach { tripStage ->
+            totalDuration += tripStage.durationInMinutes
+        }
+        return totalDuration
+    }
+}
 
 data class TripStage(
     val startLocation: TripStageLocation,

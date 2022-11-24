@@ -59,8 +59,12 @@ class ActivitiesAndEventsListFragment : Fragment(), ActivitiesListRecyclerViewAd
         binding.activitiesEventsTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab == binding.activitiesEventsTabLayout.getTabAt(0)) {
+                    binding.activitiesEventsListRecyclerView.visibility = View.GONE
+                    binding.activitiesEventsListProgressIndicator.visibility = View.VISIBLE
                     initializeActivitiesRecyclerView()
                 } else {
+                    binding.activitiesEventsListRecyclerView.visibility = View.GONE
+                    binding.activitiesEventsListProgressIndicator.visibility = View.VISIBLE
                     initializeEventsRecyclerView()
                 }
             }
@@ -85,6 +89,8 @@ class ActivitiesAndEventsListFragment : Fragment(), ActivitiesListRecyclerViewAd
         if (tags != null) {
             activitiesViewModel.getActivities(tags)
             activitiesViewModel.activities.observe(viewLifecycleOwner) { activitiesData ->
+                binding.activitiesEventsListProgressIndicator.visibility = View.GONE
+                binding.activitiesEventsListRecyclerView.visibility = View.VISIBLE
                 binding.activitiesEventsListRecyclerView.adapter = ActivitiesListRecyclerViewAdapter(
                     activitiesData.rows, this, requireContext()
                 )
@@ -106,6 +112,8 @@ class ActivitiesAndEventsListFragment : Fragment(), ActivitiesListRecyclerViewAd
         if (tags != null) {
             eventsViewModel.getEvents(tags)
             eventsViewModel.events.observe(viewLifecycleOwner) { eventsData ->
+                binding.activitiesEventsListProgressIndicator.visibility = View.GONE
+                binding.activitiesEventsListRecyclerView.visibility = View.VISIBLE
                 binding.activitiesEventsListRecyclerView.adapter = EventsListRecyclerViewAdapter(
                     eventsData.data, this, requireContext()
                 )
@@ -117,6 +125,12 @@ class ActivitiesAndEventsListFragment : Fragment(), ActivitiesListRecyclerViewAd
         val bundle = bundleOf("activityId" to activityId)
 
         requireActivity().supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.slide_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out
+            )
             setReorderingAllowed(true)
             add<IndividualActivityFragment>(R.id.fragmentContainer, args = bundle)
             addToBackStack(null)
@@ -127,6 +141,12 @@ class ActivitiesAndEventsListFragment : Fragment(), ActivitiesListRecyclerViewAd
         val bundle = bundleOf("eventId" to eventId)
 
         requireActivity().supportFragmentManager.commit {
+            setCustomAnimations(
+                R.anim.slide_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out
+            )
             setReorderingAllowed(true)
             add<IndividualPlaceAndEventFragment>(R.id.fragmentContainer, args = bundle)
             addToBackStack(null)

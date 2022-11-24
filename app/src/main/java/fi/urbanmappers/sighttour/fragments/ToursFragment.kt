@@ -42,6 +42,8 @@ class ToursFragment : Fragment(), ToursListRecyclerViewAdapter.TourItemClickList
 
         toursViewModel.getTours()
         toursViewModel.tours.observe(viewLifecycleOwner) { toursData ->
+            binding.toursListProgressIndicator.visibility = View.GONE
+            binding.toursListRecyclerView.visibility = View.VISIBLE
             binding.toursListRecyclerView.adapter = ToursListRecyclerViewAdapter(toursData.tours, this, requireContext())
         }
     }
