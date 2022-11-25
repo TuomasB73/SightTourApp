@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import fi.urbanmappers.sighttour.databinding.ActivityMainBinding
 import fi.urbanmappers.sighttour.fragments.ActivitiesAndEventsFragment
@@ -45,6 +46,12 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             replace(R.id.fragmentContainer, fragment)
+            if (supportFragmentManager.backStackEntryCount > 0) {
+                supportFragmentManager.popBackStack(
+                    supportFragmentManager.getBackStackEntryAt(0).id,
+                    FragmentManager.POP_BACK_STACK_INCLUSIVE
+                )
+            }
         }
 
         binding.bottomTabNavBar.menuBtnTours.background =
@@ -59,11 +66,11 @@ class MainActivity : AppCompatActivity() {
         when (fragment) {
             is ToursFragment -> binding.bottomTabNavBar.menuBtnTours.background =
                 AppCompatResources.getDrawable(this, R.drawable.btn_tours_selected)
-            is MapFragment ->  binding.bottomTabNavBar.menuBtnMap.background =
+            is MapFragment -> binding.bottomTabNavBar.menuBtnMap.background =
                 AppCompatResources.getDrawable(this, R.drawable.btn_map_selected)
             is PlacesFragment -> binding.bottomTabNavBar.menuBtnPlaces.background =
                 AppCompatResources.getDrawable(this, R.drawable.btn_places_selected)
-            is ActivitiesAndEventsFragment ->  binding.bottomTabNavBar.menuBtnActivities.background =
+            is ActivitiesAndEventsFragment -> binding.bottomTabNavBar.menuBtnActivities.background =
                 AppCompatResources.getDrawable(this, R.drawable.btn_activities_selected)
         }
     }

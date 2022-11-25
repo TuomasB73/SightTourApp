@@ -23,4 +23,9 @@
     <string name="tours_title_text">Find tours and explore Helsinki</string>
     <string name="tour_start_end_points_text">%s - %s</string>
     <string name="distance_duration_text">%s km, %s min</string>
+    <string name="tour_stages_text">Tour stages</string>
+    <string name="tour_stage_distance_text">%s km</string>
+    <string name="tour_stage_duration_text">%s min</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
