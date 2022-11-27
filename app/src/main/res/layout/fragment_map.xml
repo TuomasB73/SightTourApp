@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
     <org.osmdroid.views.MapView
         android:id="@+id/map"
         android:layout_width="0dp"
@@ -15,6 +14,77 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+</org.osmdroid.views.MapView>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="25dp"
+        app:fab_addButtonPlusIconColor="@color/black"
+        app:fab_addButtonColorNormal="@color/orange"
+        app:fab_labelStyle="@style/fab_buttons"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_sport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/primary_gray"
+            app:fab_icon="@drawable/fab_vector_sports"
+            app:fab_title="Sport Events" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_nature_ev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/primary_gray"
+            app:fab_icon="@drawable/fab_vector_nature"
+            app:fab_title="Nature Events" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/primary_gray"
+            app:fab_icon="@drawable/fab_vector_music"
+            app:fab_title="Music events" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_sightseeing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/primary_gray"
+            app:fab_icon="@drawable/fab_vector_sightseeing"
+            app:fab_title="Sightseeing Events" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_arts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/primary_gray"
+            app:fab_icon="@drawable/fab_vector_arts"
+            app:fab_title="Art Events" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_nightlife"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/primary_gray"
+            app:fab_icon="@drawable/fab_vector_nightlife"
+            app:fab_title="Club Events" />
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
+
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
