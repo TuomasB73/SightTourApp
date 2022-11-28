@@ -7,18 +7,24 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.preference.PreferenceManager
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import fi.urbanmappers.sighttour.R
 import fi.urbanmappers.sighttour.databinding.FragmentTourRouteMapBinding
-import fi.urbanmappers.sighttour.datamodels.Tour
+import fi.urbanmappers.sighttour.datamodels.TripStage
 import fi.urbanmappers.sighttour.viewmodels.ToursViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.osmdroid.bonuspack.routing.OSRMRoadManager
+import org.osmdroid.bonuspack.routing.RoadManager
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
@@ -30,6 +36,7 @@ class TourRouteMapFragment : Fragment(), LocationListener {
     private val toursViewModel: ToursViewModel by viewModels()
     private lateinit var lm: LocationManager
     private lateinit var myLocationMarker: Marker
+    private lateinit var roadManager: RoadManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +57,8 @@ class TourRouteMapFragment : Fragment(), LocationListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        roadManager = OSRMRoadManager(requireContext(), "SIGHTour")
+
         checkPermissionAndInitLocationTracking()
         initializeMap()
 
@@ -58,7 +67,9 @@ class TourRouteMapFragment : Fragment(), LocationListener {
             toursViewModel.getTourById(tourId)
             toursViewModel.tourById.observe(viewLifecycleOwner) { tour ->
                 binding.tourRouteTitleTextView.text = tour.name
-                setTourRouteOnMap(tour)
+                lifecycleScope.launch(Dispatchers.IO) {
+                    setTripRouteOnMap(tour.tripStages)
+                }
             }
         }
     }
@@ -71,7 +82,6 @@ class TourRouteMapFragment : Fragment(), LocationListener {
 
     override fun onLocationChanged(location: Location) {
         myLocationMarker.position = GeoPoint(location.latitude, location.longitude, location.altitude)
-        binding.tourRouteMap.controller.setCenter(GeoPoint(location.latitude, location.longitude))
         binding.tourRouteMap.overlays.add(myLocationMarker)
         myLocationMarker.setInfoWindow(null)
         binding.tourRouteMap.invalidate()
@@ -116,7 +126,25 @@ class TourRouteMapFragment : Fragment(), LocationListener {
         myLocationMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
     }
 
-    private fun setTourRouteOnMap(tour: Tour) {
+    private suspend fun setTripRouteOnMap(tripStages: List<TripStage>) {
+        val waypoints = ArrayList<GeoPoint>()
 
+        for(i in tripStages.indices) {
+            val startPoint = GeoPoint(tripStages[i].startLocation.lat, tripStages[i].startLocation.lon)
+            waypoints.add(startPoint)
+            if (i == tripStages.size - 1) {
+                val endPoint = GeoPoint(tripStages[i].endLocation.lat, tripStages[i].endLocation.lon)
+                waypoints.add(endPoint)
+            }
+        }
+
+        val road = roadManager.getRoad(waypoints)
+        val roadOverlay = RoadManager.buildRoadOverlay(road)
+        roadOverlay.width = 12f
+        binding.tourRouteMap.overlays.add(roadOverlay)
+        binding.tourRouteMap.invalidate()
+        withContext(Dispatchers.Main) {
+            binding.tourRouteMap.controller.setCenter(GeoPoint(tripStages.first().startLocation.lat, tripStages.first().startLocation.lon))
+        }
     }
 }
