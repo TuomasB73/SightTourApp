@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="route_mobility_methods_array">
+        <item>Walk</item>
+        <item>Bicycle/e-scooter</item>
+        <item>Car</item>
+    </array>
+</resources>
