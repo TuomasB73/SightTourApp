@@ -19,7 +19,8 @@ class ActivitiesListRecyclerViewAdapter(
     RecyclerView.Adapter<ActivitiesListRecyclerViewAdapter.ActivityViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_recycler_row, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.activity_recycler_row, parent, false)
         return ActivityViewHolder(view)
     }
 
@@ -29,24 +30,21 @@ class ActivitiesListRecyclerViewAdapter(
         val titleTextView: TextView = view.findViewById(R.id.titleTextView)
         val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
         val durationTextView: TextView = view.findViewById(R.id.durationTextView)
-        val tagsTextView: TextView = view.findViewById(R.id.tagsTextView)
         val imageView: ImageView = view.findViewById(R.id.imageView)
     }
 
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
-        holder.titleTextView.text = activityItems[position].descriptions["en"]?.name ?: activityItems[position].descriptions["fi"]?.name ?: ""
-        holder.descriptionTextView.text = activityItems[position].descriptions["en"]?.description ?: activityItems[position].descriptions["fi"]?.name ?: ""
-        holder.durationTextView.text = if (activityItems[position].duration != null && activityItems[position].duration?.isNotEmpty() == true)
-            context.getString(R.string.duration_text, activityItems[position].duration) else ""
-
-        var tagsString = "Tags: "
-        activityItems[position].tags.forEach { tag ->
-            tagsString += "$tag, "
-        }
-        holder.tagsTextView.text = tagsString
+        holder.titleTextView.text = activityItems[position].descriptions["en"]?.name
+            ?: activityItems[position].descriptions["fi"]?.name ?: ""
+        holder.descriptionTextView.text = activityItems[position].descriptions["en"]?.description
+            ?: activityItems[position].descriptions["fi"]?.name ?: ""
+        holder.durationTextView.text =
+            if (activityItems[position].duration != null && activityItems[position].duration?.isNotEmpty() == true)
+                context.getString(R.string.duration_text, activityItems[position].duration) else ""
 
         if (activityItems[position].media.isNotEmpty()) {
-            Glide.with(context).load(activityItems[position].media.first().smallUrl).centerCrop().into(holder.imageView)
+            Glide.with(context).load(activityItems[position].media.first().smallUrl).centerCrop()
+                .into(holder.imageView)
         }
 
         holder.itemView.setOnClickListener {

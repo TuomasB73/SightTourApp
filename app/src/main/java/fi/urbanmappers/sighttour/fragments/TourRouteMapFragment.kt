@@ -1,6 +1,8 @@
 package fi.urbanmappers.sighttour.fragments
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Location
@@ -14,12 +16,14 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColor
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import fi.urbanmappers.sighttour.R
 import fi.urbanmappers.sighttour.databinding.FragmentTourRouteMapBinding
 import fi.urbanmappers.sighttour.datamodels.TripStage
+import fi.urbanmappers.sighttour.datamodels.TripStageLocation
 import fi.urbanmappers.sighttour.utils.ToursMobilityMethod
 import fi.urbanmappers.sighttour.viewmodels.ToursViewModel
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +35,7 @@ import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.Polyline
 
 class TourRouteMapFragment : Fragment(), LocationListener {
     private lateinit var binding: FragmentTourRouteMapBinding
@@ -38,7 +43,9 @@ class TourRouteMapFragment : Fragment(), LocationListener {
     private val toursViewModel: ToursViewModel by viewModels()
     private lateinit var lm: LocationManager
     private lateinit var myLocationMarker: Marker
+    private var myLocationFound = false
     private lateinit var roadManager: RoadManager
+    private var routeToTourStartOverlay: Polyline? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,8 +77,20 @@ class TourRouteMapFragment : Fragment(), LocationListener {
                 binding.tourRouteTitleTextView.text = tour.name
                 lifecycleScope.launch(Dispatchers.IO) {
                     setTripRouteOnMap(tour.tripStages)
+
+                    withContext(Dispatchers.Main) {
+                        binding.routeToTourStartButton.setOnClickListener {
+                            openMobilityMethodDialog(tour.tripStages.first { it.tourStageSequence == 1 }.startLocation)
+                        }
+                    }
                 }
             }
+        }
+
+        binding.myLocationButton.setOnClickListener {
+            binding.tourRouteMap.controller.setCenter(
+                GeoPoint(myLocationMarker.position.latitude, myLocationMarker.position.longitude)
+            )
         }
     }
 
@@ -87,6 +106,11 @@ class TourRouteMapFragment : Fragment(), LocationListener {
         binding.tourRouteMap.overlays.add(myLocationMarker)
         myLocationMarker.setInfoWindow(null)
         binding.tourRouteMap.invalidate()
+        if (!myLocationFound) {
+            myLocationFound = true
+            binding.myLocationButton.visibility = View.VISIBLE
+            binding.routeToTourStartButton.visibility = View.VISIBLE
+        }
     }
 
     private fun checkPermissionAndInitLocationTracking() {
@@ -155,27 +179,7 @@ class TourRouteMapFragment : Fragment(), LocationListener {
             roadOverlay.outlinePaint.strokeWidth = 18f
             binding.tourRouteMap.overlays.add(roadOverlay)
 
-            val tripStageMarkerDrawable = when (tripStage.mobilityMethod) {
-                ToursMobilityMethod.Walking -> R.drawable.walking_icon_small
-                ToursMobilityMethod.Bicycling -> R.drawable.bicycle_icon_small
-                ToursMobilityMethod.EScooter -> R.drawable.escooter_icon_small
-                ToursMobilityMethod.Bus -> R.drawable.bus_icon_small
-                ToursMobilityMethod.Tram -> R.drawable.tram_icon_small
-                ToursMobilityMethod.Metro -> R.drawable.metro_icon_small
-                ToursMobilityMethod.Ferry -> R.drawable.ferry_icon_small
-            }
-            val tripStageMarkerIcon = AppCompatResources.getDrawable(
-                requireContext(),
-                tripStageMarkerDrawable
-            )
-            val tripStageMarker = Marker(binding.tourRouteMap)
-            tripStageMarker.position = startPoint
-            tripStageMarker.icon = tripStageMarkerIcon
-            tripStageMarker.title = getString(
-                R.string.tour_start_end_points_text, tripStage.startLocation.placeName,
-                tripStage.endLocation.placeName
-            )
-            binding.tourRouteMap.overlays.add(tripStageMarker)
+            setTripStageMarker(tripStage, startPoint)
         }
 
         binding.tourRouteMap.invalidate()
@@ -183,9 +187,84 @@ class TourRouteMapFragment : Fragment(), LocationListener {
         withContext(Dispatchers.Main) {
             binding.tourRouteMap.controller.setCenter(
                 GeoPoint(
-                    tripStages.first().startLocation.lat,
-                    tripStages.first().startLocation.lon
+                    tripStages.first { it.tourStageSequence == 1 }.startLocation.lat,
+                    tripStages.first { it.tourStageSequence == 1 }.startLocation.lon
                 )
+            )
+        }
+    }
+
+    private fun setTripStageMarker(tripStage: TripStage, startPoint: GeoPoint) {
+        val tripStageMarkerDrawable = when (tripStage.mobilityMethod) {
+            ToursMobilityMethod.Walking -> R.drawable.walking_icon_small
+            ToursMobilityMethod.Bicycling -> R.drawable.bicycle_icon_small
+            ToursMobilityMethod.EScooter -> R.drawable.escooter_icon_small
+            ToursMobilityMethod.Bus -> R.drawable.bus_icon_small
+            ToursMobilityMethod.Tram -> R.drawable.tram_icon_small
+            ToursMobilityMethod.Metro -> R.drawable.metro_icon_small
+            ToursMobilityMethod.Ferry -> R.drawable.ferry_icon_small
+        }
+        val tripStageMarkerIcon = AppCompatResources.getDrawable(
+            requireContext(),
+            tripStageMarkerDrawable
+        )
+        val tripStageMarker = Marker(binding.tourRouteMap)
+        tripStageMarker.position = startPoint
+        tripStageMarker.icon = tripStageMarkerIcon
+        tripStageMarker.title = getString(
+            R.string.tour_start_end_points_text, tripStage.startLocation.placeName,
+            tripStage.endLocation.placeName
+        )
+        tripStageMarker.snippet = tripStage.mobilityMethod.toString()
+        tripStageMarker.subDescription = getString(
+            R.string.distance_duration_text,
+            tripStage.lengthInKm.toString(), tripStage.durationInMinutes.toString()
+        )
+        binding.tourRouteMap.overlays.add(tripStageMarker)
+    }
+
+    private fun openMobilityMethodDialog(tourStartLocation: TripStageLocation) {
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setTitle(R.string.select_mobility_method_text)
+            .setItems(
+                R.array.route_mobility_methods_array
+            ) { _, which ->
+                val mobilityMean = when (which) {
+                    0 -> OSRMRoadManager.MEAN_BY_FOOT
+                    1 -> OSRMRoadManager.MEAN_BY_BIKE
+                    else -> OSRMRoadManager.MEAN_BY_CAR
+                }
+                lifecycleScope.launch(Dispatchers.IO) {
+                    setRouteToTourStart(mobilityMean, tourStartLocation)
+                }
+            }
+        builder.create()
+        builder.show()
+    }
+
+    private suspend fun setRouteToTourStart(mobilityMean: String, tourStartLocation: TripStageLocation) {
+        (roadManager as OSRMRoadManager).setMean(mobilityMean)
+        val road = roadManager.getRoad(
+            arrayListOf(
+                GeoPoint(myLocationMarker.position.latitude, myLocationMarker.position.longitude),
+                GeoPoint(tourStartLocation.lat, tourStartLocation.lon)
+            )
+        )
+        val roadOverlay = RoadManager.buildRoadOverlay(road)
+        roadOverlay.outlinePaint.color = ContextCompat.getColor(
+            requireContext(),
+            R.color.orange
+        )
+        roadOverlay.outlinePaint.strokeWidth = 22f
+        binding.tourRouteMap.overlays.add(roadOverlay)
+        if (routeToTourStartOverlay != null) {
+            binding.tourRouteMap.overlays.removeAt(binding.tourRouteMap.overlays.indexOf(routeToTourStartOverlay))
+        }
+        routeToTourStartOverlay = roadOverlay
+        binding.tourRouteMap.invalidate()
+        withContext(Dispatchers.Main) {
+            binding.tourRouteMap.controller.setCenter(
+                GeoPoint(myLocationMarker.position.latitude, myLocationMarker.position.longitude)
             )
         }
     }

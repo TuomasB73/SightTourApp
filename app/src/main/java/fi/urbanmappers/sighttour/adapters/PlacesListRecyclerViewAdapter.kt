@@ -27,7 +27,6 @@ class PlacesListRecyclerViewAdapter(
 
     inner class PlaceViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView = view.findViewById(R.id.titleTextView)
-        val tagsTextView: TextView = view.findViewById(R.id.tagsTextView)
         val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
         val imageView: ImageView = view.findViewById(R.id.imageView)
     }
@@ -37,13 +36,6 @@ class PlacesListRecyclerViewAdapter(
 
         // Description
         holder.descriptionTextView.text = placeItems[position].description.intro ?: ""
-
-        // Tags
-        var tagsString = "Tags: "
-        placeItems[position].tags?.forEach { tag ->
-            tagsString += "${tag.name}, "
-        }
-        holder.tagsTextView.text = tagsString
 
         if (placeItems[position].description.images != null && placeItems[position].description.images?.isNotEmpty() == true) {
             Glide.with(context).load(placeItems[position].description.images?.first()?.url).centerCrop().into(holder.imageView)
