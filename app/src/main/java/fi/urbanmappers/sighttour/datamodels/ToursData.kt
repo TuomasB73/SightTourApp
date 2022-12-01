@@ -20,7 +20,7 @@ data class Tour(
         tripStages.forEach { tripStage ->
             totalDistance += tripStage.lengthInKm
         }
-        return totalDistance
+        return String.format("%.2f", totalDistance).toDouble()
     }
 
     fun getTotalTourDuration(): Int {
