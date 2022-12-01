@@ -6,14 +6,14 @@
         <item name="colorPrimaryVariant">@color/light_orange</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/light_blue</item>
-        <item name="colorSecondaryVariant">@color/very_light_blue</item>
+        <item name="colorSecondary">@color/very_light_blue</item>
+        <item name="colorSecondaryVariant">@color/light_blue</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:textColor">@color/white</item>
-        <item name="android:colorBackground">@color/dark_theme_background</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:colorBackground">@color/background</item>
     </style>
 
     <style name="customRoundedImageView" parent="">
@@ -25,4 +25,10 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="fab_buttons">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/fab_button</item>
+    </style>
+
 </resources>

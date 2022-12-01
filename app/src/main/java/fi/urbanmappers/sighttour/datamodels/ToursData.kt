@@ -2,6 +2,7 @@ package fi.urbanmappers.sighttour.datamodels
 
 import fi.urbanmappers.sighttour.utils.ToursCategory
 import fi.urbanmappers.sighttour.utils.ToursMobilityMethod
+import kotlin.math.roundToInt
 
 data class ToursData(
     val tours: List<Tour>
@@ -20,7 +21,7 @@ data class Tour(
         tripStages.forEach { tripStage ->
             totalDistance += tripStage.lengthInKm
         }
-        return String.format("%.2f", totalDistance).toDouble()
+        return (totalDistance * 100.0).roundToInt() / 100.0
     }
 
     fun getTotalTourDuration(): Int {

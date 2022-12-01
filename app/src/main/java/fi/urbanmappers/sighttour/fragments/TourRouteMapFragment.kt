@@ -229,7 +229,7 @@ class TourRouteMapFragment : Fragment(), LocationListener {
                 requireContext(),
                 R.drawable.tour_start
             )
-            tripStageMarker.setInfoWindow(null)
+            tripStartMarker.setInfoWindow(null)
             binding.tourRouteMap.overlays.add(tripStartMarker)
         }
 
@@ -240,7 +240,7 @@ class TourRouteMapFragment : Fragment(), LocationListener {
                 requireContext(),
                 R.drawable.tour_end
             )
-            tripStageMarker.setInfoWindow(null)
+            tripEndMarker.setInfoWindow(null)
             binding.tourRouteMap.overlays.add(tripEndMarker)
         }
     }
