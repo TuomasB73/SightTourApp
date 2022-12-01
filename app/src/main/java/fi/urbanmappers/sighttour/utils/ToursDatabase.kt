@@ -52,7 +52,7 @@ object ToursDatabase {
                 )
             ),
             Tour(
-                id = "kf48fn58fj",
+                id = "fg84ngjgy8",
                 name = "Helsinki Park Tour Southeastern",
                 description = "A tour around Helsinki’s southern and eastern parks.",
                 imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Kaisaniemen_puisto_2020-10-02.jpg/800px-Kaisaniemen_puisto_2020-10-02.jpg?20210924132046",
@@ -132,9 +132,9 @@ object ToursDatabase {
                             lon = 24.93277441032145,
                             placeName = "Sinebrychoffin puisto"
                         ),
-                        mobilityMethod = ToursMobilityMethod.Walking,
-                        lengthInKm = 1.3,
-                        durationInMinutes = 16,
+                        mobilityMethod = ToursMobilityMethod.Bicycling,
+                        lengthInKm = 1.4,
+                        durationInMinutes = 5,
                         tourStageSequence = 5
                     ),
                     TripStage(
@@ -148,19 +148,19 @@ object ToursDatabase {
                             lon = 24.939821738671245,
                             placeName = "Vanha kirkkopuisto"
                         ),
-                        mobilityMethod = ToursMobilityMethod.Walking,
+                        mobilityMethod = ToursMobilityMethod.Bicycling,
                         lengthInKm = 0.6,
-                        durationInMinutes = 7,
+                        durationInMinutes = 2,
                         tourStageSequence = 6
                     ),
 
                     ),
                 categories = listOf(
-                    ToursCategory.City, ToursCategory.Nature, ToursCategory.Sightseeing, ToursCategory.Sports
+                    ToursCategory.City, ToursCategory.Nature, ToursCategory.Sightseeing
                 )
             ),
             Tour(
-                id = "nrfn598gr7dfh",
+                id = "kf487gj57gj",
                 name = "Helsinki Park Tour Northwestern",
                 description = "A tour around Helsinki’s northern and western parks.",
                 imageUrl = "https://upload.wikimedia.org/wikipedia/commons/f/f5/T%C3%B6%C3%B6l%C3%B6nlahti_park_in_Kluuvi%2C_Helsinki%2C_Finland%2C_2019_September.jpg",
@@ -224,9 +224,9 @@ object ToursDatabase {
                             lon = 24.913397684975987,
                             placeName = "Lapinniemi"
                         ),
-                        mobilityMethod = ToursMobilityMethod.Walking,
-                        lengthInKm = 1.2,
-                        durationInMinutes = 14,
+                        mobilityMethod = ToursMobilityMethod.EScooter,
+                        lengthInKm = 1.3,
+                        durationInMinutes = 4,
                         tourStageSequence = 4
                     ),
                     TripStage(
@@ -240,15 +240,15 @@ object ToursDatabase {
                             lon = 24.933782228619272,
                             placeName = "Hakasalmenpuisto"
                         ),
-                        mobilityMethod = ToursMobilityMethod.Walking,
+                        mobilityMethod = ToursMobilityMethod.EScooter,
                         lengthInKm = 1.9,
-                        durationInMinutes = 23,
+                        durationInMinutes = 7,
                         tourStageSequence = 5
                     ),
 
                     ),
                 categories = listOf(
-                    ToursCategory.City, ToursCategory.Nature, ToursCategory.Sightseeing, ToursCategory.Sports
+                    ToursCategory.City, ToursCategory.Nature, ToursCategory.Sightseeing
                 )
             )
         )
