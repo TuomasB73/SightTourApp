@@ -129,7 +129,7 @@ class TourRouteMapFragment : Fragment(), LocationListener {
                 LocationManager
         lm.requestLocationUpdates(
             LocationManager.GPS_PROVIDER,
-            1,
+            5000,
             1f,
             this
         )
