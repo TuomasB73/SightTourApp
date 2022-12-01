@@ -2,7 +2,6 @@ package fi.urbanmappers.sighttour.fragments
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Location
@@ -16,7 +15,6 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.toColor
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -179,7 +177,9 @@ class TourRouteMapFragment : Fragment(), LocationListener {
             roadOverlay.outlinePaint.strokeWidth = 18f
             binding.tourRouteMap.overlays.add(roadOverlay)
 
-            setTripStageMarker(tripStage, startPoint)
+            val isLastStage = tripStages.last() == tripStage
+            val tourEndPoint = if (isLastStage) endPoint else null
+            setTripStageMarker(tripStage, startPoint, tourEndPoint)
         }
 
         binding.tourRouteMap.invalidate()
@@ -194,7 +194,7 @@ class TourRouteMapFragment : Fragment(), LocationListener {
         }
     }
 
-    private fun setTripStageMarker(tripStage: TripStage, startPoint: GeoPoint) {
+    private fun setTripStageMarker(tripStage: TripStage, startPoint: GeoPoint, tourEndPoint: GeoPoint?) {
         val tripStageMarkerDrawable = when (tripStage.mobilityMethod) {
             ToursMobilityMethod.Walking -> R.drawable.walking_icon_small
             ToursMobilityMethod.Bicycling -> R.drawable.bicycle_icon_small
@@ -221,6 +221,28 @@ class TourRouteMapFragment : Fragment(), LocationListener {
             tripStage.lengthInKm.toString(), tripStage.durationInMinutes.toString()
         )
         binding.tourRouteMap.overlays.add(tripStageMarker)
+
+        if (tripStage.tourStageSequence == 1) {
+            val tripStartMarker = Marker(binding.tourRouteMap)
+            tripStartMarker.position = GeoPoint(startPoint.latitude - 0.0001, startPoint.longitude)
+            tripStartMarker.icon = AppCompatResources.getDrawable(
+                requireContext(),
+                R.drawable.tour_start
+            )
+            tripStageMarker.setInfoWindow(null)
+            binding.tourRouteMap.overlays.add(tripStartMarker)
+        }
+
+        if (tourEndPoint != null) {
+            val tripEndMarker = Marker(binding.tourRouteMap)
+            tripEndMarker.position = tourEndPoint
+            tripEndMarker.icon = AppCompatResources.getDrawable(
+                requireContext(),
+                R.drawable.tour_end
+            )
+            tripStageMarker.setInfoWindow(null)
+            binding.tourRouteMap.overlays.add(tripEndMarker)
+        }
     }
 
     private fun openMobilityMethodDialog(tourStartLocation: TripStageLocation) {
