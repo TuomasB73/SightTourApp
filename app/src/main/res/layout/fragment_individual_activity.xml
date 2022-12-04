@@ -121,23 +121,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="24dp"
-                app:layout_constraintBottom_toTopOf="@+id/showOnMapButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="Duration:" />
-
-            <ImageButton
-                android:id="@+id/showOnMapButton"
-                android:layout_width="260dp"
-                android:layout_height="60dp"
-                android:layout_margin="24dp"
-                android:background="@drawable/button_show_on_map_pressed"
-                android:scaleType="fitCenter"
-                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:visibility="visible" />
+                tools:text="Duration:" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

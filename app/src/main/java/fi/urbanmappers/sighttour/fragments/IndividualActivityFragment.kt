@@ -88,7 +88,5 @@ class IndividualActivityFragment : Fragment() {
             Glide.with(requireContext()).load(activity.media.first().originalUrl).centerCrop()
                 .into(binding.imageView)
         }
-
-        binding.showOnMapButton.visibility = View.VISIBLE
     }
 }

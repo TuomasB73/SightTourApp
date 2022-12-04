@@ -10,8 +10,8 @@ object ToursDatabase {
         listOf(
             Tour(
                 id = "fje8456h",
-                name = "City Centre Tour",
-                description = "A tour around Helsinki centre including various places and landmarks.",
+                name = "City Centrum Tour",
+                description = "A tour around Helsinki centrum including various places and landmarks.",
                 imageUrl = "https://upload.wikimedia.org/wikipedia/commons/1/15/Catedral_Luterana_de_Helsinki%2C_Finlandia%2C_2012-08-14%2C_DD_01.JPG",
                 tripStages = listOf(
                     TripStage(
@@ -153,8 +153,7 @@ object ToursDatabase {
                         durationInMinutes = 2,
                         tourStageSequence = 6
                     ),
-
-                    ),
+                ),
                 categories = listOf(
                     ToursCategory.City, ToursCategory.Nature, ToursCategory.Sightseeing
                 )
@@ -245,10 +244,309 @@ object ToursDatabase {
                         durationInMinutes = 7,
                         tourStageSequence = 5
                     ),
-
-                    ),
+                ),
                 categories = listOf(
                     ToursCategory.City, ToursCategory.Nature, ToursCategory.Sightseeing
+                )
+            ),
+            Tour(
+                id = "wkl9136h",
+                name = "Best Views Centrum",
+                description = "See the best views and feel the vibe of Katajannokka Ferris Wheel and more in this tour.",
+                imageUrl = "https://live.staticflickr.com/4713/26647506478_1d055ff80b_b.jpg",
+                tripStages = listOf(
+                    TripStage(
+                        startLocation = TripStageLocation(
+                            lat = 60.16951843725574,
+                            lon = 24.952309748375566,
+                            placeName = "Senate Square"
+                        ),
+                        endLocation = TripStageLocation(
+                            lat = 60.16788443880121,
+                            lon = 24.960971642233304,
+                            placeName = "Tove Jansson Park"
+                        ),
+                        mobilityMethod = ToursMobilityMethod.Walking,
+                        lengthInKm = 0.6,
+                        durationInMinutes = 8,
+                        tourStageSequence = 1
+                    ),
+                    TripStage(
+                        startLocation = TripStageLocation(
+                            lat = 60.16951843725574,
+                            lon = 24.952309748375566,
+                            placeName = "Tove Jansson Park"
+                        ),
+                        endLocation = TripStageLocation(
+                            lat = 60.16681597306523,
+                            lon = 24.959461795904488,
+                            placeName = "SkyWheel Helsinki"
+                        ),
+                        mobilityMethod = ToursMobilityMethod.EScooter,
+                        lengthInKm = 0.1,
+                        durationInMinutes = 1,
+                        tourStageSequence = 2
+                    ),
+                    TripStage(
+                        startLocation = TripStageLocation(
+                            lat = 60.16681597306523,
+                            lon = 24.959461795904488,
+                            placeName = "SkyWheel Helsinki"
+                        ),
+                        endLocation = TripStageLocation(
+                            lat = 60.16681597306523,
+                            lon = 24.959461795904488,
+                            placeName = "Allas Sea Pool"
+                        ),
+                        mobilityMethod = ToursMobilityMethod.Walking,
+                        lengthInKm = 0.1,
+                        durationInMinutes = 1,
+                        tourStageSequence = 3
+                    )
+                ),
+                categories = listOf(
+                    ToursCategory.City, ToursCategory.Sightseeing, ToursCategory.Culture
+                )
+            ),
+            Tour(
+                id = "wkl1872b",
+                name = "Local Architecture",
+                description = "Get to know some of the most beautiful historical buildings and museums located in the core of Helsinki.",
+                imageUrl = "https://live.staticflickr.com/4713/26647506478_1d055ff80b_b.jpg",
+                tripStages = listOf(
+                    TripStage(
+                        startLocation = TripStageLocation(
+                            lat = 60.17319052170126,
+                            lon = 24.92545943894807,
+                            placeName = "Temppelinaukio Church"
+                        ),
+                        endLocation = TripStageLocation(
+                            lat = 60.17506395813018,
+                            lon = 24.93148185293446,
+                            placeName = "The National Museum of Helsinki"
+                        ),
+                        mobilityMethod = ToursMobilityMethod.Walking,
+                        lengthInKm = 0.7,
+                        durationInMinutes = 8,
+                        tourStageSequence = 1
+                    ),
+                    TripStage(
+                        startLocation = TripStageLocation(
+                            lat = 60.17506395813018,
+                            lon = 24.93148185293446,
+                            placeName = "The National Museum of Helsinki"
+                        ),
+                        endLocation = TripStageLocation(
+                            lat = 60.17015593797006,
+                            lon = 24.944267339896992,
+                            placeName = "Ateneum Art Museum"
+                        ),
+                        mobilityMethod = ToursMobilityMethod.EScooter,
+                        lengthInKm = 1.0,
+                        durationInMinutes = 3,
+                        tourStageSequence = 2
+                    ),
+                    TripStage(
+                        startLocation = TripStageLocation(
+                            lat = 60.17015593797006,
+                            lon = 24.944267339896992,
+                            placeName = "Ateneum Art Museum"
+                        ),
+                        endLocation = TripStageLocation(
+                            lat = 60.168317544620656,
+                            lon = 24.939056455746307,
+                            placeName = "Yrjonkatu Swimming Hall"
+                        ),
+                        mobilityMethod = ToursMobilityMethod.Walking,
+                        lengthInKm = 0.6,
+                        durationInMinutes = 9,
+                        tourStageSequence = 3
+                    )
+                ),
+                categories = listOf(
+                    ToursCategory.City, ToursCategory.Sightseeing, ToursCategory.Culture
+                )
+            ),
+            Tour(
+                id = " 1p2jkk90",
+                name = "Vintage Clothing",
+                description = "Get to know some of the most beautiful historical buildings and museums located in the core of Helsinki.",
+                imageUrl = "https://live.staticflickr.com/4713/26647506478_1d055ff80b_b.jpg",
+                tripStages = listOf(
+                    TripStage(
+                        startLocation = TripStageLocation(
+                            lat = 60.16566719558398,
+                            lon = 24.933060411799936,
+                            placeName = "Variety Vintage"
+                        ),
+                        endLocation = TripStageLocation(
+                            lat = 60.16621830638612,
+                            lon = 24.93478713365054,
+                            placeName = "UFF Frederinkinkatu"
+                        ),
+                        mobilityMethod = ToursMobilityMethod.Walking,
+                        lengthInKm = 0.1,
+                        durationInMinutes = 2,
+                        tourStageSequence = 1
+                    ),
+                    TripStage(
+                        startLocation = TripStageLocation(
+                            lat = 60.16621830638612,
+                            lon = 24.93478713365054,
+                            placeName = " UFF Frederinkinkatu"
+                        ),
+                        endLocation = TripStageLocation(
+                            lat = 60.16563339200075,
+                            lon = 24.935619063195983,
+                            placeName = "FTA Vintage"
+                        ),
+                        mobilityMethod = ToursMobilityMethod.Walking,
+                        lengthInKm = 0.1,
+                        durationInMinutes = 2,
+                        tourStageSequence = 2
+                    ),
+                    TripStage(
+                        startLocation = TripStageLocation(
+                            lat = 60.16563339200075,
+                            lon = 24.935619063195983,
+                            placeName = "FTA Vintage"
+                        ),
+                        endLocation = TripStageLocation(
+                            lat = 60.168914216582806,
+                            lon = 24.930729796469873,
+                            placeName = "Metro Kamppi"
+                        ),
+                        mobilityMethod = ToursMobilityMethod.Walking,
+                        lengthInKm = 0.2,
+                        durationInMinutes = 3,
+                        tourStageSequence = 3
+                    ),
+                    TripStage(
+                        startLocation = TripStageLocation(
+                            lat = 60.168914216582806,
+                            lon = 24.930729796469873,
+                            placeName = "Metro Kamppi"
+                        ),
+                        endLocation = TripStageLocation(
+                            lat = 60.17946289729578,
+                            lon = 24.95025307216305,
+                            placeName = "Metro Hakaniemi"
+                        ),
+                        mobilityMethod = ToursMobilityMethod.Metro,
+                        lengthInKm = 2.1,
+                        durationInMinutes = 7,
+                        tourStageSequence = 4
+                    ),
+                    TripStage(
+                        startLocation = TripStageLocation(
+                            lat = 60.17946289729578,
+                            lon = 24.95025307216305,
+                            placeName = "Metro Hakaniemi"
+                        ),
+                        endLocation = TripStageLocation(
+                            lat = 60.18067011751023,
+                            lon = 24.95182134362997,
+                            placeName = "UFF Hakaniemi"
+                        ),
+                        mobilityMethod = ToursMobilityMethod.Walking,
+                        lengthInKm = 0.2,
+                        durationInMinutes = 3,
+                        tourStageSequence = 5
+                    ),
+                    TripStage(
+                        startLocation = TripStageLocation(
+                            lat = 60.18067011751023,
+                            lon = 24.95182134362997,
+                            placeName = "UFF Hakaniemi"
+                        ),
+                        endLocation = TripStageLocation(
+                            lat = 60.18324599738862,
+                            lon = 24.95756388088953,
+                            placeName = "Almost New"
+                        ),
+                        mobilityMethod = ToursMobilityMethod.Walking,
+                        lengthInKm = 0.5,
+                        durationInMinutes = 6,
+                        tourStageSequence = 6
+                    )
+                ),
+                categories = listOf(
+                    ToursCategory.City, ToursCategory.Shopping
+                )
+            ),
+            Tour(
+                id = " 1jkda1j0",
+                name = "Vintage Clothing Centrum",
+                description = "Get to know some of the most beautiful historical buildings and museums located in the core of Helsinki.",
+                imageUrl = "https://live.staticflickr.com/4713/26647506478_1d055ff80b_b.jpg",
+                tripStages = listOf(
+                    TripStage(
+                        startLocation = TripStageLocation(
+                            lat = 60.169312564945436,
+                            lon = 24.938219215715687,
+                            placeName = "Beyond Retro"
+                        ),
+                        endLocation = TripStageLocation(
+                            lat = 60.16621830638612,
+                            lon = 24.93478713365054,
+                            placeName = "UFF Frederinkinkatu"
+                        ),
+                        mobilityMethod = ToursMobilityMethod.Walking,
+                        lengthInKm = 0.6,
+                        durationInMinutes = 7,
+                        tourStageSequence = 1
+                    ),
+                    TripStage(
+                        startLocation = TripStageLocation(
+                            lat = 60.16621830638612,
+                            lon = 24.93478713365054,
+                            placeName = " UFF Frederinkinkatu"
+                        ),
+                        endLocation = TripStageLocation(
+                            lat = 60.16563339200075,
+                            lon = 24.935619063195983,
+                            placeName = "FTA Vintage"
+                        ),
+                        mobilityMethod = ToursMobilityMethod.Walking,
+                        lengthInKm = 0.1,
+                        durationInMinutes = 2,
+                        tourStageSequence = 2
+                    ),
+                    TripStage(
+                        startLocation = TripStageLocation(
+                            lat = 60.16563339200075,
+                            lon = 24.935619063195983,
+                            placeName = "FTA Vintage"
+                        ),
+                        endLocation = TripStageLocation(
+                            lat = 60.16346203570559,
+                            lon = 24.934733675120423,
+                            placeName = "UFF Vintage Bulevardi"
+                        ),
+                        mobilityMethod = ToursMobilityMethod.Walking,
+                        lengthInKm = 0.3,
+                        durationInMinutes = 4,
+                        tourStageSequence = 3
+                    ),
+                    TripStage(
+                        startLocation = TripStageLocation(
+                            lat = 60.16346203570559,
+                            lon = 24.934733675120423,
+                            placeName = "UFF Vintage Bulevardi"
+                        ),
+                        endLocation = TripStageLocation(
+                            lat = 60.16278531439106,
+                            lon = 24.940407444513102,
+                            placeName = "Fida Roba"
+                        ),
+                        mobilityMethod = ToursMobilityMethod.Walking,
+                        lengthInKm = 0.5,
+                        durationInMinutes = 5,
+                        tourStageSequence = 4
+                    )
+                ),
+                categories = listOf(
+                    ToursCategory.City, ToursCategory.Shopping
                 )
             )
         )
