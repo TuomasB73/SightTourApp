@@ -6,7 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import fi.urbanmappers.sighttour.R
@@ -61,6 +64,23 @@ class IndividualPlaceAndEventFragment : Fragment() {
                 val imageUrl = if (event.description.images != null && event.description.images.isNotEmpty())
                     event.description.images.first().url else null
                 setDataToUI(title, description, imageUrl)
+            }
+        }
+
+        binding.showOnMapButton.setOnClickListener {
+            val bundle = if (placeId != null) bundleOf("placeId" to placeId) else if (eventId != null)
+                bundleOf("eventId" to eventId) else null
+
+            requireActivity().supportFragmentManager.commit {
+                setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out
+                )
+                setReorderingAllowed(true)
+                add<MapFragment>(R.id.fragmentContainer, args = bundle)
+                addToBackStack(null)
             }
         }
     }
