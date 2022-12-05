@@ -29,4 +29,6 @@
     <string name="route_to_tour_start_text">Route to tour start</string>
     <string name="select_mobility_method_text">Select mobility method</string>
     <string name="map_title_text">Find interesting events near you</string>
+    <string name="open_details_dialog_text">Open details</string>
+    <string name="close_dialog_text">Close</string>
 </resources>
