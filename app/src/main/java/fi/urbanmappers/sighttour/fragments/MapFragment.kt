@@ -214,7 +214,7 @@ class MapFragment : Fragment(), LocationListener {
     private fun getEventsData(tagCategory: String) {
         binding.floatingActionsMenu.collapse()
         binding.mapProgressIndicator.visibility = View.VISIBLE
-        eventsViewModel.getEvents(tags = tagCategory, distance = "$latitude,$longitude,5")
+        eventsViewModel.getEvents(tags = tagCategory, distance = "$latitude,$longitude,40")
         eventsViewModel.events.observe(viewLifecycleOwner) { eventsData ->
             setEventMarkersOnMap(eventsData.data, tagCategory)
             binding.mapProgressIndicator.visibility = View.GONE
