@@ -43,8 +43,6 @@ class MapFragment : Fragment(), LocationListener {
     private lateinit var binding: FragmentMapBinding
     private lateinit var myLocationMarker: Marker
     private var myLocationFound = false
-    private var latitude = 0.00
-    private var longitude = 0.00
     private lateinit var lm: LocationManager
     private val eventsViewModel: EventsViewModel by viewModels()
     private val placesViewModel: PlacesViewModel by viewModels()
@@ -124,8 +122,6 @@ class MapFragment : Fragment(), LocationListener {
     }
 
     override fun onLocationChanged(location: Location) {
-        latitude = location.latitude
-        longitude = location.longitude
         myLocationMarker.position =
             GeoPoint(location.latitude, location.longitude, location.altitude)
         myLocationMarker.setInfoWindow(null)
@@ -214,7 +210,7 @@ class MapFragment : Fragment(), LocationListener {
     private fun getEventsData(tagCategory: String) {
         binding.floatingActionsMenu.collapse()
         binding.mapProgressIndicator.visibility = View.VISIBLE
-        eventsViewModel.getEvents(tags = tagCategory, distance = "$latitude,$longitude,40")
+        eventsViewModel.getEvents(tags = tagCategory)
         eventsViewModel.events.observe(viewLifecycleOwner) { eventsData ->
             setEventMarkersOnMap(eventsData.data, tagCategory)
             binding.mapProgressIndicator.visibility = View.GONE
