@@ -229,12 +229,12 @@ class MapFragment : Fragment(), LocationListener {
                 val eventMarker = Marker(binding.map)
                 eventMarker.position = GeoPoint(event.location.lat, event.location.lon)
                 val markerDrawable = when (tagCategory) {
-                    TagCategories.eventsSportsTags -> R.drawable.fab_vector_sports
-                    TagCategories.eventsNatureTags -> R.drawable.fab_vector_nature
-                    TagCategories.eventsMusicTags -> R.drawable.fab_vector_music
-                    TagCategories.eventsSightseeingTags -> R.drawable.fab_vector_sightseeing
-                    TagCategories.eventsArtsTags -> R.drawable.fab_vector_arts
-                    TagCategories.eventsNightlifeTags -> R.drawable.fab_vector_nightlife
+                    TagCategories.eventsSportsTags -> R.drawable.pin_sports
+                    TagCategories.eventsNatureTags -> R.drawable.pin_nature
+                    TagCategories.eventsMusicTags -> R.drawable.pin_music
+                    TagCategories.eventsSightseeingTags -> R.drawable.pin_sightseeing
+                    TagCategories.eventsArtsTags -> R.drawable.pin_arts
+                    TagCategories.eventsNightlifeTags -> R.drawable.pin_nightlife
                     else -> R.drawable.ic_baseline_location_on_orange_48
                 }
                 eventMarker.icon = AppCompatResources.getDrawable(
