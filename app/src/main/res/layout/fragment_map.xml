@@ -12,12 +12,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="@string/map_title_text"
         android:textAlignment="center"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/map_title_text" />
 
     <org.osmdroid.views.MapView
         android:id="@+id/map"
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/primary_gray"
             app:fab_icon="@drawable/fab_vector_music"
-            app:fab_title="Music events" />
+            app:fab_title="Music Events" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_sightseeing"

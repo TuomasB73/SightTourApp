@@ -2,13 +2,16 @@ package fi.urbanmappers.sighttour.fragments
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,13 +20,20 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import fi.urbanmappers.sighttour.R
 import fi.urbanmappers.sighttour.databinding.FragmentMapBinding
 import fi.urbanmappers.sighttour.datamodels.Event
 import fi.urbanmappers.sighttour.utils.TagCategories
 import fi.urbanmappers.sighttour.viewmodels.EventsViewModel
 import fi.urbanmappers.sighttour.viewmodels.PlacesViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.osmdroid.bonuspack.routing.OSRMRoadManager
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
@@ -72,16 +82,28 @@ class MapFragment : Fragment(), LocationListener {
             placesViewModel.getPlaceById(placeId)
             placesViewModel.placeById.observe(viewLifecycleOwner) { place ->
                 binding.mapTitleTextView.text = place.name.en ?: place.name.fi ?: ""
-                showIndividualPlaceOrEventMarker("place", place.id, place.name.en ?: place.name.fi,
-                    place.location.address.streetAddress, place.description.intro, place.location.lat, place.location.lon)
+                showIndividualPlaceOrEventMarker(
+                    place.name.en ?: place.name.fi,
+                    place.location.address.streetAddress,
+                    place.description.intro,
+                    place.location.lat,
+                    place.location.lon
+                )
             }
         } else if (eventId != null) {
             eventsViewModel.getEventById(eventId)
             eventsViewModel.eventById.observe(viewLifecycleOwner) { event ->
-                val infoText = if (event.eventDates?.startingDay != null && event.eventDates.endingDay != null)
-                    "${event.eventDates.startingDay} - ${event.eventDates.endingDay}" else null
-                showIndividualPlaceOrEventMarker("event", event.id, event.name.en ?: event.name.fi,
-                    infoText, event.description.intro, event.location.lat, event.location.lon)
+                binding.mapTitleTextView.text = event.name.en ?: event.name.fi ?: ""
+                val infoText =
+                    if (event.eventDates?.startingDay != null && event.eventDates.endingDay != null)
+                        "${event.eventDates.startingDay} - ${event.eventDates.endingDay}" else null
+                showIndividualPlaceOrEventMarker(
+                    event.name.en ?: event.name.fi,
+                    infoText,
+                    event.description.intro,
+                    event.location.lat,
+                    event.location.lon
+                )
             }
         } else {
             binding.mapTitleTextView.text = getString(R.string.map_title_text)
@@ -104,7 +126,8 @@ class MapFragment : Fragment(), LocationListener {
     override fun onLocationChanged(location: Location) {
         latitude = location.latitude
         longitude = location.longitude
-        myLocationMarker.position = GeoPoint(location.latitude, location.longitude, location.altitude)
+        myLocationMarker.position =
+            GeoPoint(location.latitude, location.longitude, location.altitude)
         myLocationMarker.setInfoWindow(null)
         binding.map.overlays.add(myLocationMarker)
         binding.map.invalidate()
@@ -157,19 +180,24 @@ class MapFragment : Fragment(), LocationListener {
                 }
                 permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
                     // Only approximate location access granted.
-                } else -> {
-                // No location access granted.
-            }
+                }
+                else -> {
+                    // No location access granted.
+                }
             }
         }
 
-        locationPermissionRequest.launch(arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION))
+        locationPermissionRequest.launch(
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+        )
     }
-    
+
     private fun initializeMap() {
-        Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context))
+        Configuration.getInstance()
+            .load(context, PreferenceManager.getDefaultSharedPreferences(context))
 
         binding.map.setTileSource(TileSourceFactory.MAPNIK)
         binding.map.setMultiTouchControls(true)
@@ -213,11 +241,15 @@ class MapFragment : Fragment(), LocationListener {
                     requireContext(),
                     markerDrawable
                 )
-                eventMarker.title = event.name.en ?: event.name.fi ?: ""
-                if (event.eventDates?.startingDay != null && event.eventDates.endingDay != null) {
-                    eventMarker.snippet = "${event.eventDates.startingDay} - ${event.eventDates.endingDay}"
+                eventMarker.setInfoWindow(null)
+                eventMarker.setOnMarkerClickListener { _, _ ->
+                    openEventDialog(
+                        event.id,
+                        event.name.en ?: event.name.fi ?: "",
+                        event.description.intro ?: ""
+                    )
+                    true
                 }
-                eventMarker.subDescription = event.description.intro
                 binding.map.overlays.add(eventMarker)
                 eventMarkersOnMap.add(eventMarker)
             }
@@ -225,8 +257,37 @@ class MapFragment : Fragment(), LocationListener {
         binding.map.invalidate()
     }
 
-    private fun showIndividualPlaceOrEventMarker(itemType: String, id: String, title: String?, infoText: String?,
-    description: String?, lat: Double?, lon: Double?) {
+    private fun openEventDialog(eventId: String, title: String, description: String) {
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setTitle(title)
+            .setMessage(description)
+            .setPositiveButton(
+                R.string.open_details_dialog_text
+            ) { _, _ ->
+                val bundle = bundleOf("eventId" to eventId)
+
+                requireActivity().supportFragmentManager.commit {
+                    setCustomAnimations(
+                        R.anim.slide_in,
+                        R.anim.fade_out,
+                        R.anim.fade_in,
+                        R.anim.slide_out
+                    )
+                    setReorderingAllowed(true)
+                    add<IndividualPlaceAndEventFragment>(R.id.fragmentContainer, args = bundle)
+                    addToBackStack(null)
+                }
+            }
+            .setNegativeButton(
+                R.string.close_dialog_text
+            ) { _, _ -> }
+        builder.create()
+        builder.show()
+    }
+
+    private fun showIndividualPlaceOrEventMarker(
+        title: String?, infoText: String?, description: String?, lat: Double?, lon: Double?
+    ) {
         if (lat != null && lon != null) {
             val marker = Marker(binding.map)
             marker.position = GeoPoint(lat, lon)
