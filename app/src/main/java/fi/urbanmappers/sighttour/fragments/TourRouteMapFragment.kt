@@ -1,5 +1,7 @@
 package fi.urbanmappers.sighttour.fragments
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.pm.PackageManager
@@ -12,6 +14,7 @@ import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -87,7 +90,7 @@ class TourRouteMapFragment : Fragment(), LocationListener {
 
         binding.myLocationButton.setOnClickListener {
             binding.tourRouteMap.controller.setCenter(
-                GeoPoint(myLocationMarker.position.latitude, myLocationMarker.position.longitude)
+                myLocationMarker.position
             )
         }
     }
@@ -111,28 +114,34 @@ class TourRouteMapFragment : Fragment(), LocationListener {
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun checkPermissionAndInitLocationTracking() {
-        if ((ContextCompat.checkSelfPermission(
-                requireContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            ) !=
-                    PackageManager.PERMISSION_GRANTED)
-        ) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                0
-            )
+        val locationPermissionRequest = registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                    // Precise location access granted.
+                    lm = requireActivity().getSystemService(Context.LOCATION_SERVICE) as
+                            LocationManager
+                    lm.requestLocationUpdates(
+                        LocationManager.GPS_PROVIDER,
+                        5000,
+                        1f,
+                        this
+                    )
+                }
+                permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                    // Only approximate location access granted.
+                } else -> {
+                // No location access granted.
+            }
+            }
         }
 
-        lm = requireActivity().getSystemService(Context.LOCATION_SERVICE) as
-                LocationManager
-        lm.requestLocationUpdates(
-            LocationManager.GPS_PROVIDER,
-            5000,
-            1f,
-            this
-        )
+        locationPermissionRequest.launch(arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION))
     }
 
     private fun initializeMap() {

@@ -28,4 +28,5 @@
     <string name="tour_stage_duration_text">%s min</string>
     <string name="route_to_tour_start_text">Route to tour start</string>
     <string name="select_mobility_method_text">Select mobility method</string>
+    <string name="map_title_text">Find interesting events near you</string>
 </resources>
