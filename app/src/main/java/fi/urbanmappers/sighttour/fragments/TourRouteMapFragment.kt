@@ -102,8 +102,7 @@ class TourRouteMapFragment : Fragment(), LocationListener {
     }
 
     override fun onLocationChanged(location: Location) {
-        myLocationMarker.position =
-            GeoPoint(location.latitude, location.longitude, location.altitude)
+        myLocationMarker.position = GeoPoint(location.latitude, location.longitude)
         binding.tourRouteMap.overlays.add(myLocationMarker)
         myLocationMarker.setInfoWindow(null)
         binding.tourRouteMap.invalidate()
