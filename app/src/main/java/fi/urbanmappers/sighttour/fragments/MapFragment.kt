@@ -122,8 +122,7 @@ class MapFragment : Fragment(), LocationListener {
     }
 
     override fun onLocationChanged(location: Location) {
-        myLocationMarker.position =
-            GeoPoint(location.latitude, location.longitude, location.altitude)
+        myLocationMarker.position = GeoPoint(location.latitude, location.longitude)
         myLocationMarker.setInfoWindow(null)
         binding.map.overlays.add(myLocationMarker)
         binding.map.invalidate()
