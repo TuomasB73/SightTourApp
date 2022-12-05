@@ -312,7 +312,7 @@ object ToursDatabase {
                 id = "wkl1872b",
                 name = "Local Architecture",
                 description = "Get to know some of the most beautiful historical buildings and museums located in the core of Helsinki.",
-                imageUrl = "https://live.staticflickr.com/4713/26647506478_1d055ff80b_b.jpg",
+                imageUrl = "https://www.discoveringfinland.com/wp-content/uploads/2010/07/Yrj%C3%B6nkatu-Swimming-Hall.jpg",
                 tripStages = listOf(
                     TripStage(
                         startLocation = TripStageLocation(
@@ -370,8 +370,8 @@ object ToursDatabase {
             Tour(
                 id = " 1p2jkk90",
                 name = "Vintage Clothing",
-                description = "Get to know some of the most beautiful historical buildings and museums located in the core of Helsinki.",
-                imageUrl = "https://live.staticflickr.com/4713/26647506478_1d055ff80b_b.jpg",
+                description = "Active Vintage Clothing stores located in areas of Kamppi and Kallio",
+                imageUrl = "https://pr1.nicelocal.fi/pFxnltxc59_5HF3G5U22lw/1120x700,q85/4px-BW84_n0QJGVPszge3NRBsKw-2VcOifrJIjPYFYkOtaCZxxXQ2TUPC-OGe4jrq8w17_YCiwjbPcJeXqZH83bXOHZChYh_JxA0Knlrl8htLrOkKWy8ig",
                 tripStages = listOf(
                     TripStage(
                         startLocation = TripStageLocation(
@@ -477,8 +477,8 @@ object ToursDatabase {
             Tour(
                 id = " 1jkda1j0",
                 name = "Vintage Clothing Centrum",
-                description = "Get to know some of the most beautiful historical buildings and museums located in the core of Helsinki.",
-                imageUrl = "https://live.staticflickr.com/4713/26647506478_1d055ff80b_b.jpg",
+                description = "Vintage Store trip going through Kamppi and Punavuori.",
+                imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Iso_Roobertinkatu_in_Punavuori%2C_Helsinki%2C_Finland%2C_2022_August.jpg/1024px-Iso_Roobertinkatu_in_Punavuori%2C_Helsinki%2C_Finland%2C_2022_August.jpg",
                 tripStages = listOf(
                     TripStage(
                         startLocation = TripStageLocation(

@@ -1,5 +1,7 @@
 package fi.urbanmappers.sighttour.fragments
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
@@ -11,6 +13,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -68,6 +71,7 @@ class MapFragment : Fragment(), LocationListener {
         if (placeId != null) {
             placesViewModel.getPlaceById(placeId)
             placesViewModel.placeById.observe(viewLifecycleOwner) { place ->
+                binding.mapTitleTextView.text = place.name.en ?: place.name.fi ?: ""
                 showIndividualPlaceOrEventMarker("place", place.id, place.name.en ?: place.name.fi,
                     place.location.address.streetAddress, place.description.intro, place.location.lat, place.location.lon)
             }
@@ -79,6 +83,14 @@ class MapFragment : Fragment(), LocationListener {
                 showIndividualPlaceOrEventMarker("event", event.id, event.name.en ?: event.name.fi,
                     infoText, event.description.intro, event.location.lat, event.location.lon)
             }
+        } else {
+            binding.mapTitleTextView.text = getString(R.string.map_title_text)
+        }
+
+        binding.myLocationButton.setOnClickListener {
+            binding.map.controller.setCenter(
+                myLocationMarker.position
+            )
         }
     }
 
@@ -86,6 +98,7 @@ class MapFragment : Fragment(), LocationListener {
         super.onDestroyView()
 
         lm.removeUpdates(this)
+        myLocationFound = false
     }
 
     override fun onLocationChanged(location: Location) {
@@ -97,6 +110,7 @@ class MapFragment : Fragment(), LocationListener {
         binding.map.invalidate()
         if (!myLocationFound) {
             myLocationFound = true
+            binding.myLocationButton.visibility = View.VISIBLE
             // If the map is opened to show an individual place or event on the map, it won't be centered
             // on the user's location, and the events fab menu won't be made visible.
             if (placeId == null && eventId == null) {
@@ -124,28 +138,34 @@ class MapFragment : Fragment(), LocationListener {
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun checkPermissionAndInitLocationTracking() {
-        if ((ContextCompat.checkSelfPermission(
-                requireContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            ) !=
-                    PackageManager.PERMISSION_GRANTED)
-        ) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                0
-            )
+        val locationPermissionRequest = registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                    // Precise location access granted.
+                    lm = requireActivity().getSystemService(Context.LOCATION_SERVICE) as
+                            LocationManager
+                    lm.requestLocationUpdates(
+                        LocationManager.GPS_PROVIDER,
+                        5000,
+                        1f,
+                        this
+                    )
+                }
+                permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                    // Only approximate location access granted.
+                } else -> {
+                // No location access granted.
+            }
+            }
         }
 
-        lm = requireActivity().getSystemService(Context.LOCATION_SERVICE) as
-                LocationManager
-        lm.requestLocationUpdates(
-            LocationManager.GPS_PROVIDER,
-            5000,
-            1f,
-            this
-        )
+        locationPermissionRequest.launch(arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION))
     }
     
     private fun initializeMap() {
@@ -165,9 +185,11 @@ class MapFragment : Fragment(), LocationListener {
 
     private fun getEventsData(tagCategory: String) {
         binding.floatingActionsMenu.collapse()
+        binding.mapProgressIndicator.visibility = View.VISIBLE
         eventsViewModel.getEvents(tags = tagCategory, distance = "$latitude,$longitude,5")
         eventsViewModel.events.observe(viewLifecycleOwner) { eventsData ->
             setEventMarkersOnMap(eventsData.data, tagCategory)
+            binding.mapProgressIndicator.visibility = View.GONE
         }
     }
 
